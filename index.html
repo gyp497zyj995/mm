@@ -1,0 +1,4672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>保密知识测试试题库 - 智能在线答题系统 (填空+判断)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at 10% 20%, rgba(240, 244, 255, 0.8) 0%, rgba(248, 250, 252, 1) 90%);
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --accent: #06b6d4;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --success-border: #a7f3d0;
+      --error: #ef4444;
+      --error-light: #fef2f2;
+      --error-border: #fecaca;
+      --warning: #f59e0b;
+      --warning-light: #fffbeb;
+      --warning-border: #fde68a;
+      --blank-border: #94a3b8;
+      --blank-focus: #2563eb;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 25px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: radial-gradient(circle at 10% 20%, #0f172a 0%, #090d16 100%);
+      --bg-color: #090d16;
+      --card-bg: #131d31;
+      --card-border: #24344d;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --primary-light: rgba(59, 130, 246, 0.15);
+      --accent: #22d3ee;
+      --success: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+      --success-border: #065f46;
+      --error: #f87171;
+      --error-light: rgba(239, 68, 68, 0.15);
+      --error-border: #991b1b;
+      --warning: #fbbf24;
+      --warning-light: rgba(245, 158, 11, 0.15);
+      --warning-border: #92400e;
+      --blank-border: #475569;
+      --blank-focus: #3b82f6;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    /* 顶部导航重构优化（完美适配移动端、平板与桌面端） */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    [data-theme="dark"] header {
+      background: rgba(19, 29, 49, 0.92);
+    }
+
+    .nav-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* 顶层：品牌标题与快捷设置 */
+    .header-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: nowrap;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .brand-title svg {
+      flex-shrink: 0;
+    }
+
+    .brand-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      color: #ffffff;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .header-quick-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    /* 次层：模式切换与题型横向滚动栏 */
+    .header-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-pills {
+      display: flex;
+      background: var(--bg-color);
+      border: 1px solid var(--card-border);
+      padding: 3px;
+      border-radius: var(--radius-md);
+      gap: 3px;
+      flex-shrink: 0;
+    }
+
+    .mode-pill {
+      padding: 6px 13px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .mode-pill.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* 题型过滤器（支持在窄屏/手机端丝滑横向触摸滚动） */
+    .type-filter-wrapper {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+      padding: 2px 0;
+    }
+    .type-filter-wrapper::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+
+    .type-filter-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-color);
+      padding: 3px 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .type-pill {
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .type-pill.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
+    }
+
+    /* 移动端特定媒体查询优化 */
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 8px 14px;
+        gap: 8px;
+      }
+      .brand-title {
+        font-size: 1.02rem;
+      }
+      .brand-title span.title-text {
+        font-size: 1rem;
+      }
+      .brand-badge {
+        font-size: 0.68rem;
+        padding: 2px 6px;
+      }
+      .header-bottom-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .mode-pills {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+      }
+      .mode-pill {
+        flex: 1;
+        text-align: center;
+        padding: 6px 6px;
+        font-size: 0.8rem;
+      }
+      .type-filter-wrapper {
+        width: 100%;
+      }
+      .type-filter-group {
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+
+      /* 主体间距与卡片微调 */
+      .main-wrapper {
+        margin: 10px auto;
+        padding: 0 12px 60px 12px;
+        gap: 16px;
+      }
+      .question-card {
+        padding: 20px 16px;
+      }
+      .dashboard-strip {
+        padding: 12px 16px;
+        gap: 12px;
+      }
+      .stat-group {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        width: 100%;
+      }
+      .stat-box {
+        align-items: center;
+      }
+      .progress-track {
+        max-width: 100%;
+        width: 100%;
+      }
+      .blank-input {
+        min-width: 70px;
+        max-width: 100%;
+      }
+    }
+
+    /* 按钮基础样式 */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      outline: none;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--card-border);
+      color: var(--text-main);
+    }
+    .btn-outline:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+    }
+    .btn-ghost:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.8rem;
+    }
+
+    .mode-pills {
+      display: flex;
+      background: var(--bg-color);
+      border: 1px solid var(--card-border);
+      padding: 3px;
+      border-radius: var(--radius-md);
+      gap: 3px;
+    }
+
+    .mode-pill {
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+    .mode-pill.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* 题型过滤器胶囊 */
+    .type-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-color);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--card-border);
+    }
+    .type-pill {
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+    }
+    .type-pill.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    /* 主布局 */
+    .main-wrapper {
+      max-width: 1320px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 0 20px 60px 20px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 992px) {
+      .main-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 统计信息条 */
+    .dashboard-strip {
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 16px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .stat-group {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-label {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .stat-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-main);
+    }
+    .stat-value.correct { color: var(--success); }
+    .stat-value.error { color: var(--error); }
+    .stat-value.hint { color: var(--warning); }
+
+    .progress-track {
+      flex: 1;
+      min-width: 180px;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .progress-bar-bg {
+      height: 8px;
+      background: var(--card-border);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #06b6d4);
+      width: 0%;
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+
+    /* 答题卡片区域 */
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* 单题卡片 (单题模式) */
+    .question-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .q-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px dashed var(--card-border);
+    }
+
+    .q-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    .q-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .q-fav-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .q-fav-btn:hover {
+      transform: scale(1.15);
+      color: #f59e0b;
+    }
+    .q-fav-btn.active {
+      color: #f59e0b;
+    }
+
+    .q-body {
+      font-size: 1.16rem;
+      line-height: 2.2;
+      color: var(--text-main);
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    /* 判断题操作专属卡 */
+    .judge-controls {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      justify-content: center;
+    }
+
+    .btn-judge {
+      flex: 1;
+      max-width: 240px;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 2px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-judge:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-judge.true-btn:hover {
+      border-color: var(--success);
+      color: var(--success);
+      background: var(--success-light);
+    }
+    .btn-judge.false-btn:hover {
+      border-color: var(--error);
+      color: var(--error);
+      background: var(--error-light);
+    }
+
+    .btn-judge.selected-correct {
+      border-color: var(--success);
+      background: var(--success);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+    
+    /* 选择题专属选项卡 */
+    
+    /* 多选题专用复选卡片 */
+    .btn-multi-opt {
+      width: 100%;
+      text-align: left;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      font-size: 1.05rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1.5px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-multi-opt:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .btn-multi-opt.checked {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+    }
+    .btn-multi-opt.checked .opt-key-badge {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .btn-multi-opt.selected-correct {
+      border-color: var(--success);
+      background: var(--success-light);
+      color: #065f46;
+    }
+    [data-theme="dark"] .btn-multi-opt.selected-correct {
+      color: #34d399;
+    }
+    .btn-multi-opt.selected-correct .opt-key-badge {
+      background: var(--success);
+      color: #ffffff;
+    }
+    
+    /* 问答题专属界面 */
+    .essay-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .essay-textarea {
+      width: 100%;
+      min-height: 140px;
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--card-border);
+      background: var(--bg-color);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 1rem;
+      line-height: 1.7;
+      outline: none;
+      resize: vertical;
+      transition: all 0.2s ease;
+    }
+    .essay-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      background: var(--card-bg);
+    }
+    .essay-point-item {
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      border-radius: 6px;
+      background: var(--card-bg);
+      border-left: 3px solid var(--primary);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+    .essay-keyword-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      margin: 2px 4px;
+      border-radius: 4px;
+      background: var(--warning-light);
+      color: #92400e;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+    [data-theme="dark"] .essay-keyword-tag {
+      color: #fde68a;
+    }
+    .essay-action-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-multi-opt.selected-wrong {
+      border-color: var(--error);
+      background: var(--error-light);
+      color: #991b1b;
+      animation: shake 0.35s ease;
+    }
+    [data-theme="dark"] .btn-multi-opt.selected-wrong {
+      color: #f87171;
+    }
+    .btn-multi-opt.selected-wrong .opt-key-badge {
+      background: var(--error);
+      color: #ffffff;
+    }
+    .multi-submit-btn-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .choice-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn-choice-opt {
+      width: 100%;
+      text-align: left;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      font-size: 1.05rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1.5px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-choice-opt:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateX(4px);
+    }
+
+    .opt-key-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--card-border);
+      color: var(--text-main);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .btn-choice-opt.selected-correct {
+      border-color: var(--success);
+      background: var(--success-light);
+      color: #065f46;
+    }
+    [data-theme="dark"] .btn-choice-opt.selected-correct {
+      color: #34d399;
+    }
+    .btn-choice-opt.selected-correct .opt-key-badge {
+      background: var(--success);
+      color: #ffffff;
+    }
+
+    .btn-choice-opt.selected-wrong {
+      border-color: var(--error);
+      background: var(--error-light);
+      color: #991b1b;
+      animation: shake 0.35s ease;
+    }
+    [data-theme="dark"] .btn-choice-opt.selected-wrong {
+      color: #f87171;
+    }
+    .btn-choice-opt.selected-wrong .opt-key-badge {
+      background: var(--error);
+      color: #ffffff;
+    }
+
+    .btn-judge.selected-wrong {
+      border-color: var(--error);
+      background: var(--error);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+    }
+
+    /* 填空输入框样式 */
+    .blank-wrap {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      margin: 0 4px;
+      vertical-align: middle;
+    }
+
+    .blank-input {
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      background: rgba(37, 99, 235, 0.03);
+      border: none;
+      border-bottom: 2px solid var(--blank-border);
+      border-radius: 4px 4px 0 0;
+      padding: 2px 28px 2px 8px;
+      min-width: 90px;
+      text-align: center;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    [data-theme="dark"] .blank-input {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .blank-input:focus {
+      border-bottom-color: var(--blank-focus);
+      background: var(--primary-light);
+      box-shadow: 0 3px 0 0 rgba(37, 99, 235, 0.2);
+    }
+
+    .blank-input.correct {
+      border-bottom-color: var(--success);
+      color: #059669;
+      background: var(--success-light);
+    }
+    [data-theme="dark"] .blank-input.correct {
+      color: #34d399;
+    }
+
+    .blank-input.wrong {
+      border-bottom-color: var(--error);
+      color: var(--error);
+      background: var(--error-light);
+      animation: shake 0.35s ease;
+    }
+
+    .blank-input.hinted {
+      border-bottom-color: var(--warning);
+      color: #d97706;
+      background: var(--warning-light);
+    }
+    [data-theme="dark"] .blank-input.hinted {
+      color: #fbbf24;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-4px); }
+      40%, 80% { transform: translateX(4px); }
+    }
+
+    /* 输入框内的小提示图标 */
+    .blank-hint-btn {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 2px;
+      line-height: 1;
+      opacity: 0.6;
+      transition: all 0.2s ease;
+    }
+    .blank-hint-btn:hover {
+      opacity: 1;
+      color: #f59e0b;
+      transform: translateY(-50%) scale(1.15);
+    }
+
+    /* 气泡提示浮窗 */
+    .hint-bubble {
+      margin-top: 18px;
+      background: var(--warning-light);
+      border: 1px solid var(--warning-border);
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      font-size: 0.92rem;
+      color: #92400e;
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      animation: fadeIn 0.2s ease;
+    }
+    [data-theme="dark"] .hint-bubble {
+      color: #fde68a;
+    }
+    .hint-bubble.show {
+      display: flex;
+    }
+
+    /* 正确答案与解析卡 */
+    .q-solution-box {
+      margin-top: 20px;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      background: var(--success-light);
+      border: 1px solid var(--success-border);
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+    .q-solution-box.show {
+      display: block;
+    }
+    .solution-title {
+      font-weight: 700;
+      color: #065f46;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    [data-theme="dark"] .solution-title {
+      color: #34d399;
+    }
+    .solution-content {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: var(--text-main);
+    }
+    .solution-highlight {
+      font-weight: 700;
+      color: #dc2626;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    [data-theme="dark"] .solution-highlight {
+      color: #f87171;
+    }
+
+    /* 操作按钮行 */
+    .q-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .q-nav-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .keyboard-tips {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .kbd {
+      background: var(--card-border);
+      color: var(--text-main);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+    }
+
+    /* 背题模式下的显隐标记 */
+    .memory-token {
+      display: inline-block;
+      padding: 0 6px;
+      margin: 0 4px;
+      border-bottom: 2px solid #ef4444;
+      font-weight: 700;
+      color: #dc2626;
+      cursor: pointer;
+      background: #fee2e2;
+      border-radius: 4px;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+    [data-theme="dark"] .memory-token {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+    }
+    .memory-token.hidden-mask {
+      background: var(--card-border);
+      color: transparent;
+      border-bottom-color: var(--blank-border);
+      cursor: pointer;
+    }
+    .memory-token.hidden-mask::after {
+      content: "👁 点我看答案";
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+
+    /* 全卷列表模式下的题目卡片 */
+    .list-mode-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .list-section-heading {
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: 8px 12px;
+      border-left: 4px solid var(--primary);
+      background: var(--card-bg);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 16px 0 8px 0;
+    }
+
+    .list-item-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .list-item-card.correct-item {
+      border-left: 4px solid var(--success);
+    }
+    .list-item-card.wrong-item {
+      border-left: 4px solid var(--error);
+    }
+
+    /* 侧边栏：答题卡与工具 */
+    .sidebar {
+      position: sticky;
+      top: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .sidebar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sidebar-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* 答题卡网格 */
+    .grid-nav {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      max-height: 290px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .grid-btn {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.15s ease;
+    }
+    .grid-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .grid-btn.current {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+    .grid-btn.correct {
+      background: var(--success);
+      color: #ffffff;
+      border-color: var(--success);
+    }
+    .grid-btn.wrong {
+      background: var(--error);
+      color: #ffffff;
+      border-color: var(--error);
+    }
+    .grid-btn.hinted {
+      background: var(--warning);
+      color: #ffffff;
+      border-color: var(--warning);
+    }
+    .grid-btn.starred::after {
+      content: "★";
+      position: absolute;
+      top: 1px;
+      right: 2px;
+      font-size: 9px;
+      color: #f59e0b;
+    }
+    .grid-btn.correct.starred::after,
+    .grid-btn.wrong.starred::after {
+      color: #ffffff;
+    }
+
+    .legend-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-size: 0.78rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .filter-btn.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* 快捷功能卡 */
+    .tool-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* 模态框 */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.show {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      max-width: 500px;
+      width: 100%;
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+      animation: modalUp 0.25s ease;
+    }
+    @keyframes modalUp {
+      from { transform: translateY(20px) scale(0.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* 浮动提示 Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      z-index: 999;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* 打印/导出友好 */
+    @media print {
+      header, .sidebar, .q-actions, .dashboard-strip, .keyboard-tips {
+        display: none !important;
+      }
+      .main-wrapper {
+        display: block;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .question-card, .list-item-card {
+        box-shadow: none;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        page-break-inside: avoid;
+        padding: 16px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header>
+    <div class="nav-container">
+      <!-- 顶层行：品牌标识与系统操作 -->
+      <div class="header-top-row">
+        <div class="brand-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span class="title-text">知识测试试题库</span>
+          <span class="brand-badge">共 168 题 · 全真题库</span>
+        </div>
+
+        <div class="header-quick-actions">
+          <button class="btn btn-outline btn-sm" onclick="toggleTheme()" title="切换亮暗主题" id="themeToggleBtn">
+            🌙 暗色模式
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="resetAllProgress()">
+            🔄 重置
+          </button>
+        </div>
+      </div>
+
+      <!-- 次层行：答题模式切换 与 题型横向滑动过滤栏 -->
+      <div class="header-bottom-row">
+        <div class="mode-pills">
+          <button class="mode-pill active" id="btnModeSingle" onclick="switchAppMode('single')">🎯 沉浸练习</button>
+          <button class="mode-pill" id="btnModeList" onclick="switchAppMode('list')">📄 整卷答题</button>
+          <button class="mode-pill" id="btnModeMemory" onclick="switchAppMode('memory')">📖 背题突击</button>
+        </div>
+
+        <div class="type-filter-wrapper">
+          <div class="type-filter-group">
+            <button class="type-pill active" id="typeFilterAll" onclick="setQuestionTypeScope('all', this)">全部(168)</button>
+            <button class="type-pill" id="typeFilterBlank" onclick="setQuestionTypeScope('blank', this)">填空(50)</button>
+            <button class="type-pill" id="typeFilterJudge" onclick="setQuestionTypeScope('judge', this)">判断(50)</button>
+            <button class="type-pill" id="typeFilterChoice" onclick="setQuestionTypeScope('choice', this)">单选(35)</button>
+            <button class="type-pill" id="typeFilterMulti" onclick="setQuestionTypeScope('multi_choice', this)">多选(15)</button>
+            <button class="type-pill" id="typeFilterSpecial" onclick="setQuestionTypeScope('special', this)">专项(10)</button>
+            <button class="type-pill" id="typeFilterEssay" onclick="setQuestionTypeScope('essay', this)">问答(8)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体区域 -->
+  <main class="main-wrapper">
+
+    <!-- 顶部数据看板 -->
+    <div class="dashboard-strip">
+      <div class="stat-group">
+        <div class="stat-box">
+          <span class="stat-label">总题目数</span>
+          <span class="stat-value" id="totalCountDisplay">168</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">已答题目</span>
+          <span class="stat-value" id="answeredCountDisplay">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">正确</span>
+          <span class="stat-value correct" id="correctCountDisplay">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">错误</span>
+          <span class="stat-value error" id="wrongCountDisplay">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">使用提示</span>
+          <span class="stat-value hint" id="hintedCountDisplay">0</span>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">
+          <span>答题进度</span>
+          <span id="progressPercentDisplay">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 左侧内容容器 -->
+    <section class="content-area">
+
+      <!-- 1. 沉浸单题模式 -->
+      <div id="singleModeSection">
+        <div class="question-card" id="currentQuestionCard">
+          <div class="q-header">
+            <div class="q-badge">
+              <span id="qNumberTag" style="font-size: 1.3rem; font-family: 'JetBrains Mono';">填空题 第 1 题</span>
+              <span class="q-tag" id="qTypeTag">填空题</span>
+              <span class="q-tag" id="qExtraTag">2 个空</span>
+            </div>
+            <button class="q-fav-btn" id="starCurrentBtn" onclick="toggleCurrentStar()" title="收藏此题">
+              ★
+            </button>
+          </div>
+
+          <!-- 题目文本及填空槽 / 判断题干 -->
+          <div class="q-body" id="qBodyContainer">
+            <!-- 动态渲染题目 -->
+          </div>
+
+          <!-- 判断题选项按钮区 (仅判断题展示) -->
+          <div class="judge-controls" id="judgeControlsArea" style="display: none;">
+            <button class="btn-judge true-btn" id="btnJudgeTrue" onclick="handleJudgeSelect(true)">
+              <span style="font-size: 1.4rem;">✔</span> 正确 (True)
+            </button>
+            <button class="btn-judge false-btn" id="btnJudgeFalse" onclick="handleJudgeSelect(false)">
+              <span style="font-size: 1.4rem;">✖</span> 错误 (False)
+            </button>
+          </div>
+
+          <!-- 单选题选项区 (仅单选题展示) -->
+          <div class="choice-controls" id="choiceControlsArea" style="display: none;">
+            <!-- 动态渲染选项 -->
+          </div>
+
+          <!-- 问答题专属交互区 (仅问答题展示) -->
+          <div class="essay-controls" id="essayControlsArea" style="display: none;">
+            <!-- 动态渲染文本域与操作 -->
+          </div>
+
+          <!-- 提示气泡框 -->
+          <div class="hint-bubble" id="hintBubble">
+            <span style="font-size: 1.2rem;">💡</span>
+            <div id="hintBubbleContent"></div>
+          </div>
+
+          <!-- 正确答案与解析 -->
+          <div class="q-solution-box" id="solutionBox">
+            <div class="solution-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>标准答案与考点解析</span>
+            </div>
+            <div class="solution-content" id="solutionContent"></div>
+          </div>
+
+          <!-- 操作行 -->
+          <div class="q-actions">
+            <div class="q-nav-btns">
+              <button class="btn btn-outline" onclick="navigateQuestion(-1)">
+                ◀ 上一题
+              </button>
+              <button class="btn btn-primary" id="btnSubmitOrNext" onclick="handleCardSubmitOrNext()">
+                核对并下一题 ▶
+              </button>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button class="btn btn-outline btn-sm" onclick="triggerHintForCurrentQuestion()" title="智能提示" style="color: #d97706; border-color: #fcd34d;">
+                💡 题目提示 (<span id="currentHintLevelText">轻度</span>)
+              </button>
+              <button class="btn btn-ghost btn-sm" onclick="toggleSolutionBox()" title="直接查看答案">
+                👁 查看答案
+              </button>
+            </div>
+
+            <div class="keyboard-tips">
+              <span>快捷键：</span>
+              <span><kbd class="kbd">Enter</kbd> 提交/下一题</span>
+              <span><kbd class="kbd">T</kbd>/<kbd class="kbd">F</kbd> 判断题正误</span>
+              <span><kbd class="kbd">Alt+H</kbd> 提示</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 整卷全览列表模式 -->
+      <div id="listModeSection" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h2 style="font-size: 1.15rem; font-weight: 700;">全卷试题全览（填空50 + 判断50 + 单选35 + 多选15 + 专项填空10 + 专业问答8，共168题）</h2>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-primary btn-sm" onclick="batchCheckListAnswers()">
+              ✅ 一键批量交卷核对
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="batchClearListAnswers()">
+              🗑 清空作答
+            </button>
+          </div>
+        </div>
+        <div class="list-mode-container" id="listQuestionsContainer">
+          <!-- 动态生成试题列表 -->
+        </div>
+      </div>
+
+      <!-- 3. 背题记忆模式 -->
+      <div id="memoryModeSection" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <h2 style="font-size: 1.15rem; font-weight: 700;">背题速记模式</h2>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">填空词条支持点击遮盖默写；判断题已标明正误与易错要点解析！</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" onclick="toggleAllMemoryMask(true)">
+              🙈 全部遮盖
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="toggleAllMemoryMask(false)">
+              👁 全部揭开
+            </button>
+          </div>
+        </div>
+        <div class="list-mode-container" id="memoryQuestionsContainer">
+          <!-- 动态生成背诵视图 -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 右侧工具栏与答题卡 -->
+    <aside class="sidebar">
+
+      <!-- 答题卡 -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <span>📋 题号答题卡</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="jumpStatusText">点击快速跳转</span>
+        </div>
+
+        <!-- 状态过滤 -->
+        <div class="filter-pills">
+          <button class="filter-btn active" onclick="setNavFilter('all', this)">全部</button>
+          <button class="filter-btn" onclick="setNavFilter('wrong', this)">错题</button>
+          <button class="filter-btn" onclick="setNavFilter('starred', this)">已收藏</button>
+          <button class="filter-btn" onclick="setNavFilter('unanswered', this)">未做</button>
+        </div>
+
+        <div class="grid-nav" id="gridNavContainer">
+          <!-- 题号格子 -->
+        </div>
+
+        <div class="legend-list">
+          <div class="legend-item"><div class="legend-dot" style="background: var(--card-border);"></div> 未做</div>
+          <div class="legend-item"><div class="legend-dot" style="background: var(--success);"></div> 正确</div>
+          <div class="legend-item"><div class="legend-dot" style="background: var(--error);"></div> 错误</div>
+          <div class="legend-item"><div class="legend-dot" style="background: var(--warning);"></div> 用提示</div>
+        </div>
+      </div>
+
+      <!-- 学习工具箱 -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <span>⚙️ 专项训练</span>
+        </div>
+        <div class="tool-list">
+          <button class="btn btn-outline" style="width: 100%; justify-content: flex-start;" onclick="startWrongQuestionsPractice()">
+            🎯 仅练错题 (<span id="wrongCountBadge">0</span>)
+          </button>
+          <button class="btn btn-outline" style="width: 100%; justify-content: flex-start;" onclick="startStarredQuestionsPractice()">
+            ⭐ 仅练收藏题 (<span id="starredCountBadge">0</span>)
+          </button>
+          <button class="btn btn-outline" style="width: 100%; justify-content: flex-start;" onclick="shufflePracticeOrder()">
+            🔀 随机打乱试题顺序
+          </button>
+          <button class="btn btn-outline" style="width: 100%; justify-content: flex-start;" onclick="window.print()">
+            🖨 打印或导出试卷
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- 全局 Toast 提示 -->
+  <div class="toast" id="globalToast">操作成功</div>
+
+  <!-- 试卷批改结算弹窗 -->
+  <div class="modal-backdrop" id="scoreModal">
+    <div class="modal-content">
+      <h3 style="font-size: 1.3rem; margin-bottom: 12px; font-weight: 800;">🎉 测评成绩结算</h3>
+      <div style="text-align: center; margin: 20px 0;">
+        <div style="font-size: 3.2rem; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--primary);" id="modalScoreText">
+          100%
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;" id="modalScoreDesc">共 70 题，答对 70 题</p>
+      </div>
+      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px;">
+        <button class="btn btn-outline" onclick="closeScoreModal()">关闭</button>
+        <button class="btn btn-primary" onclick="startWrongQuestionsPractice(); closeScoreModal();">仅复习错题</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ============================================================
+       全量题库数据：填空题 (50题) + 判断题 (20题)
+       精确对应两页试卷文档内容
+       ============================================================ */
+    const ALL_QUESTIONS = [
+      /* ---------------- 一、填空题 (共50题) ---------------- */
+      {
+        uid: "b_1",
+        num: 1,
+        type: "blank",
+        typeName: "填空题",
+        template: "《中华人民共和国宪法》第五十三条规定，中华人民共和国{1}必须遵守宪法和法律，{2}，爱护公共财产，遵守劳动纪律，遵守公共秩序，尊重社会公德。",
+        answers: ["公民", "保守国家秘密"],
+        alts: [["公民"], ["保守国家秘密"]],
+        source: "《中华人民共和国宪法》第五十三条"
+      },
+      {
+        uid: "b_2",
+        num: 2,
+        type: "blank",
+        typeName: "填空题",
+        template: "《中华人民共和国保守国家秘密法》由中华人民共和国第11届全国人民代表大会常务委员会第十四次会议于2010年4月29日修订通过，自{1}起施行。",
+        answers: ["2010年10月1日"],
+        alts: [["2010年10月1日", "2010.10.1", "2010-10-01", "2010年10月1号"]],
+        source: "《中华人民共和国保守国家秘密法》"
+      },
+      {
+        uid: "b_3",
+        num: 3,
+        type: "blank",
+        typeName: "填空题",
+        template: "国家秘密是关系国家的安全和利益，依照{1}确定，在一定时间内{2}的人员知悉的事项。",
+        answers: ["法定程序", "只限一定范围"],
+        alts: [["法定程序"], ["只限一定范围", "限定在一定范围", "限定一定范围"]],
+        source: "国家秘密基本定义"
+      },
+      {
+        uid: "b_4",
+        num: 4,
+        type: "blank",
+        typeName: "填空题",
+        template: "保守国家秘密的工作，实行{1}、突出重点、{2}的方针，既确保国家秘密安全，又{3}。",
+        answers: ["积极防范", "依法管理", "便利信息资源合理利用"],
+        alts: [["积极防范"], ["依法管理"], ["便利信息资源合理利用"]],
+        source: "保密工作方针"
+      },
+      {
+        uid: "b_5",
+        num: 5,
+        type: "blank",
+        typeName: "填空题",
+        template: "机关、单位应当实行保密工作{1}，健全保密管理制度，完善保密防护措施，开展保密宣传教育，加强{2}。",
+        answers: ["责任制", "保密检查"],
+        alts: [["责任制"], ["保密检查"]],
+        source: "保密管理制度"
+      },
+      {
+        uid: "b_6",
+        num: 6,
+        type: "blank",
+        typeName: "填空题",
+        template: "国家秘密的密级分为{1}、{2}、{3}三级。",
+        answers: ["绝密", "机密", "秘密"],
+        alts: [["绝密"], ["机密"], ["秘密"]],
+        source: "国家秘密密级划分"
+      },
+      {
+        uid: "b_7",
+        num: 7,
+        type: "blank",
+        typeName: "填空题",
+        template: "绝密级国家秘密是{1}的国家秘密，泄露会使国家安全和利益遭受{2}。",
+        answers: ["最重要", "特别严重的损害"],
+        alts: [["最重要"], ["特别严重的损害", "特别严重损害"]],
+        source: "绝密级定义"
+      },
+      {
+        uid: "b_8",
+        num: 8,
+        type: "blank",
+        typeName: "填空题",
+        template: "机密级国家秘密是{1}的国家秘密，泄露会使国家安全和利益遭受{2}。",
+        answers: ["重要", "严重的损害"],
+        alts: [["重要"], ["严重的损害", "严重损害"]],
+        source: "机密级定义"
+      },
+      {
+        uid: "b_9",
+        num: 9,
+        type: "blank",
+        typeName: "填空题",
+        template: "秘密级国家秘密是{1}的国家秘密，泄露会使国家安全和利益遭受{2}。",
+        answers: ["一般", "损害"],
+        alts: [["一般"], ["损害"]],
+        source: "秘密级定义"
+      },
+      {
+        uid: "b_10",
+        num: 10,
+        type: "blank",
+        typeName: "填空题",
+        template: "国家秘密的知悉范围，应当根据工作需要{1}。",
+        answers: ["限定在最小范围"],
+        alts: [["限定在最小范围", "限定最小范围", "控制在最小范围"]],
+        source: "知悉范围规定"
+      },
+      {
+        uid: "b_11",
+        num: 11,
+        type: "blank",
+        typeName: "填空题",
+        template: "机关、单位对承载国家秘密的纸介质、光介质、电磁介质等载体以及属于国家秘密的设备、产品，应当做出{1}标志。",
+        answers: ["国家秘密"],
+        alts: [["国家秘密", "国家秘密标志"]],
+        source: "密件标志管理"
+      },
+      {
+        uid: "b_12",
+        num: 12,
+        type: "blank",
+        typeName: "填空题",
+        template: "在涉密岗位工作的人员（简称涉密人员），按照涉密程度分为：{1}涉密人员、{2}涉密人员和{3}涉密人员，实行分类管理。",
+        answers: ["核心", "重要", "一般"],
+        alts: [["核心"], ["重要"], ["一般"]],
+        source: "涉密人员分类"
+      },
+      {
+        uid: "b_13",
+        num: 13,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密人员脱离涉密岗位必须实行脱密期管理，其中核心涉密人员脱密期为{1}年，重要涉密人员为{2}年，一般涉密人员为{3}。",
+        answers: ["2-3", "1-2", "6个月至1年"],
+        alts: [["2-3", "2~3", "2至3", "2-3年"], ["1-2", "1~2", "1至2", "1-2年"], ["6个月至1年", "6个月-1年", "6个月~1年", "半年至1年", "6个月到1年"]],
+        source: "脱密期规定"
+      },
+      {
+        uid: "b_14",
+        num: 14,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密人员应当具有良好的{1}，具有胜任涉密岗位所要求的{2}。",
+        answers: ["政治素质和品行", "工作能力"],
+        alts: [["政治素质和品行", "政治素质与品行"], ["工作能力", "业务工作能力"]],
+        source: "涉密人员基本要求"
+      },
+      {
+        uid: "b_15",
+        num: 15,
+        type: "blank",
+        typeName: "填空题",
+        template: "《中华人民共和国刑法》第一百一十一条规定，为境外的机构、组织、人员窃取、刺探、收买、非法提供国家秘密或者情报的，处{1}有期徒刑。",
+        answers: ["五年以上十年以下"],
+        alts: [["五年以上十年以下", "5年以上10年以下", "五年至十年", "5至10年"]],
+        source: "《刑法》第一百一十一条"
+      },
+      {
+        uid: "b_16",
+        num: 16,
+        type: "blank",
+        typeName: "填空题",
+        template: "国家秘密载体印制（以下简称涉密印制）资质是保密行政管理部门许可企业事业单位从事国家涉密印制业务的{1}。从事涉密印制业务的生产经营企业事业单位应当依照《{2}》，取得国家秘密载体印制资质。",
+        answers: ["法定资格", "国家秘密载体印制资质管理办法"],
+        alts: [
+          ["法定资格", "法定资质"],
+          ["国家秘密载体印制资质管理办法", "《国家秘密载体印制资质管理办法》"]
+        ],
+        source: "涉密印制资质性质"
+      },
+      {
+        uid: "b_17",
+        num: 17,
+        type: "blank",
+        typeName: "填空题",
+        template: "{1}资质单位可以从事绝密级、机密级、秘密级涉密印制业务；{2}资质单位可以从事机密级、秘密级涉密印制业务。",
+        answers: ["甲级", "乙级"],
+        alts: [["甲级"], ["乙级"]],
+        source: "资质等级与承接范围"
+      },
+      {
+        uid: "b_18",
+        num: 18,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密印制资质分为涉密{1}、国家统一考试试卷、涉密{2}、涉密光电磁介质和涉密档案数字化加工。涉密印制资质单位应当在保密行政管理部门许可的{3}范围内承接涉密印制业务。",
+        answers: ["文件资料", "防伪票据证书", "业务种类"],
+        alts: [["文件资料"], ["防伪票据证书", "防伪票据及证书"], ["业务种类", "业务范围"]],
+        source: "涉密印制类别"
+      },
+      {
+        uid: "b_19",
+        num: 19,
+        type: "blank",
+        typeName: "填空题",
+        template: "保密资质审查分为{1}、{2}。确有需要的，可以组织专家开展评审。",
+        answers: ["书面审查", "现场审查"],
+        alts: [["书面审查"], ["现场审查"]],
+        source: "保密资质审查形式"
+      },
+      {
+        uid: "b_20",
+        num: 20,
+        type: "blank",
+        typeName: "填空题",
+        template: "《资质证书》有效期满，需要继续从事涉密印制业务的，应当在有效期届满{1}前向保密行政管理部门提出延续申请，申请单位未按规定期限提出延续申请的，视为{2}。",
+        answers: ["3个月", "重新申请"],
+        alts: [["3个月", "三个月", "3月"], ["重新申请"]],
+        source: "资质证书延续规则"
+      },
+      {
+        uid: "b_21",
+        num: 21,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密印制资质单位应当具备具有自有产权或者租赁期{1}（含）以上的固定生产经营场所。",
+        answers: ["3年"],
+        alts: [["3年", "三年", "3"]],
+        source: "经营场所规定"
+      },
+      {
+        uid: "b_22",
+        num: 22,
+        type: "blank",
+        typeName: "填空题",
+        template: "资质单位与其他单位合作开展涉密印制业务的，合作单位应当具有{1}资质且取得委托方{2}。",
+        answers: ["相应的涉密印制", "书面同意"],
+        alts: [["相应的涉密印制", "相应涉密印制", "相应印制"], ["书面同意", "书面许可"]],
+        source: "合作印制业务规定"
+      },
+      {
+        uid: "b_23",
+        num: 23,
+        type: "blank",
+        typeName: "填空题",
+        template: "资质单位实行年度自检制度，应当于每年{1}前向作出准予行政许可决定的保密行政管理部门报送上一年度自检报告。",
+        answers: ["3月31日"],
+        alts: [["3月31日", "3月31号", "3.31"]],
+        source: "年度自检制度"
+      },
+      {
+        uid: "b_24",
+        num: 24,
+        type: "blank",
+        typeName: "填空题",
+        template: "资质单位应当成立{1}，为本单位保密工作领导机构。",
+        answers: ["保密工作领导小组"],
+        alts: [["保密工作领导小组", "保密领导小组"]],
+        source: "保密领导机构"
+      },
+      {
+        uid: "b_25",
+        num: 25,
+        type: "blank",
+        typeName: "填空题",
+        template: "资质单位设置{1}，此职为单位领导班子成员，甲级资质单位应当为{2}。",
+        answers: ["保密总监", "专职"],
+        alts: [["保密总监"], ["专职"]],
+        source: "保密总监设立要求"
+      },
+      {
+        uid: "b_26",
+        num: 26,
+        type: "blank",
+        typeName: "填空题",
+        template: "保密管理办公室为资质单位的{1}部门，负责人由{2}管理人员担任。",
+        answers: ["职能", "中层以上"],
+        alts: [["职能"], ["中层以上", "中层及以上"]],
+        source: "保密管理办公室定位"
+      },
+      {
+        uid: "b_27",
+        num: 27,
+        type: "blank",
+        typeName: "填空题",
+        template: "资质单位应当建立规范、操作性强的保密制度，并根据实际情况及时修订完善。保密制度的具体要求应当体现在单位相关{1}和{2}中。",
+        answers: ["管理制度", "业务工作流程"],
+        alts: [["管理制度"], ["业务工作流程", "工作流程"]],
+        source: "保密制度落地"
+      },
+      {
+        uid: "b_28",
+        num: 28,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密人员应当通过{1}，并签订{2}后方能上岗。",
+        answers: ["保密教育培训", "保密承诺书"],
+        alts: [["保密教育培训", "保密培训", "保密教育"], ["保密承诺书"]],
+        source: "涉密人员上岗规定"
+      },
+      {
+        uid: "b_29",
+        num: 29,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密人员因私出国（境）实行{1}，履行审批程序，必要时应当征求涉密业务{2}意见。按照出国（境）行前保密教育和{3}要求管理。",
+        answers: ["统一管理", "委托方", "回访"],
+        alts: [["统一管理"], ["委托方"], ["回访"]],
+        source: "涉密人员出国（境）管理"
+      },
+      {
+        uid: "b_30",
+        num: 30,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密人员擅自出境或逾期不归的，单位应当及时报告{1}。",
+        answers: ["保密行政管理部门"],
+        alts: [["保密行政管理部门", "保密局", "保密管理部门"]],
+        source: "违规出境报告规定"
+      },
+      {
+        uid: "b_31",
+        num: 31,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密人员离岗离职前应当{1}保管和使用的涉密载体、涉密信息设备等，并按相关保密规定实行{2}管理。",
+        answers: ["清退", "脱密期"],
+        alts: [["清退", "交回"], ["脱密期"]],
+        source: "离岗离职管理"
+      },
+      {
+        uid: "b_32",
+        num: 32,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密人员应当主动报告就业变更及{1}，严格落实{2}规定。",
+        answers: ["个人重大事项", "从业限制"],
+        alts: [["个人重大事项"], ["从业限制"]],
+        source: "重大事项与就业限制"
+      },
+      {
+        uid: "b_33",
+        num: 33,
+        type: "blank",
+        typeName: "填空题",
+        template: "通过媒体、互联网等渠道对外发布信息，应当履行{1}。",
+        answers: ["审批手续"],
+        alts: [["审批手续", "审批程序", "审核审批手续"]],
+        source: "信息发布保密审批"
+      },
+      {
+        uid: "b_34",
+        num: 34,
+        type: "blank",
+        typeName: "填空题",
+        template: "资质单位保密检查应当进行{1}，内容包括：检查时间、检查人、{2}、检查事项、存在问题、{3}及落实情况等。",
+        answers: ["书面记录", "检查对象", "整改措施"],
+        alts: [["书面记录"], ["检查对象"], ["整改措施"]],
+        source: "保密检查规范"
+      },
+      {
+        uid: "b_35",
+        num: 35,
+        type: "blank",
+        typeName: "填空题",
+        template: "每年开展{1}保密风险评估，并制定{2}，对发现的保密风险隐患进行{3}，提出有针对性的防控措施。",
+        answers: ["1次", "评估方案", "分析和评估"],
+        alts: [["1次", "一次", "1", "至少1次"], ["评估方案"], ["分析和评估", "分析与评估", "分析评估"]],
+        source: "保密风险评估工作要求"
+      },
+      {
+        uid: "b_36",
+        num: 36,
+        type: "blank",
+        typeName: "填空题",
+        template: "保密风险隐患的防控措施融入到{1}和{2}中，并建立相应的{3}机制。",
+        answers: ["管理制度", "业务工作流程", "监督检查"],
+        alts: [["管理制度"], ["业务工作流程", "工作流程"], ["监督检查", "检查监督"]],
+        source: "保密隐患长效机制"
+      },
+      {
+        uid: "b_37",
+        num: 37,
+        type: "blank",
+        typeName: "填空题",
+        template: "保密工作经费分为{1}、{2}和{3}。",
+        answers: ["保密补贴", "保密管理经费", "保密专项经费"],
+        alts: [["保密补贴"], ["保密管理经费"], ["保密专项经费"]],
+        source: "保密经费管理分类"
+      },
+      {
+        uid: "b_38",
+        num: 38,
+        type: "blank",
+        typeName: "填空题",
+        template: "严格控制国家秘密载体的{1}和涉密信息的{2}，持有国家秘密载体或者知悉国家秘密，应当履行{3}。",
+        answers: ["接触范围", "知悉程度", "审批程序"],
+        alts: [["接触范围"], ["知悉程度"], ["审批程序", "审批手续"]],
+        source: "载体与涉密信息管理"
+      },
+      {
+        uid: "b_39",
+        num: 39,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密信息设备应当按照存储、处理信息的{1}进行管理与防护。",
+        answers: ["最高密级"],
+        alts: [["最高密级", "最高等级"]],
+        source: "涉密设备防护准则"
+      },
+      {
+        uid: "b_40",
+        num: 40,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密信息设备应当采取{1}、访问控制、违规外联监控、{2}、移动存储介质使用管控等安全保密措施，并及时升级病毒库和恶意代码样本库，定期进行病毒和恶意代码查杀。",
+        answers: ["身份鉴别", "安全审计"],
+        alts: [["身份鉴别", "身份认证"], ["安全审计"]],
+        source: "信息设备安全措施"
+      },
+      {
+        uid: "b_41",
+        num: 41,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密信息设备的维修，应当在{1}进行，并指定专人{2}，严禁维修人员读取或复制涉密信息。确需送外维修的，须拆除{3}。",
+        answers: ["本单位内部", "全程监督", "涉密信息存储部件"],
+        alts: [["本单位内部", "单位内部", "本单位"], ["全程监督", "全过程监督"], ["涉密信息存储部件", "存储部件", "硬盘"]],
+        source: "设备维修保密管理"
+      },
+      {
+        uid: "b_42",
+        num: 42,
+        type: "blank",
+        typeName: "填空题",
+        template: "携带涉密计算机和存储介质外出，应当履行{1}手续，带出前和带回后应当进行{2}。",
+        answers: ["审批", "保密检查"],
+        alts: [["审批", "审批核准"], ["保密检查", "安全检查"]],
+        source: "涉密介质外出规定"
+      },
+      {
+        uid: "b_43",
+        num: 43,
+        type: "blank",
+        typeName: "填空题",
+        template: "禁止在涉密计算机和非涉密计算机上{1}使用移动存储介质。",
+        answers: ["交叉"],
+        alts: [["交叉", "交叉混用", "混用"]],
+        source: "移动存储介质管控红线"
+      },
+      {
+        uid: "b_44",
+        num: 44,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密信息设备禁止与{1}连接，不得具有{2}功能。",
+        answers: ["互联网及其他公共信息网络", "无线联网"],
+        alts: [["互联网及其他公共信息网络", "互联网及其他公共网络", "互联网及公共信息网络", "互联网"], ["无线联网", "无线互联", "无线通信"]],
+        source: "网络隔离与无线限制"
+      },
+      {
+        uid: "b_45",
+        num: 45,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密印制场所应当安装{1}等安防系统，实行{2}管理。",
+        answers: ["门禁、视频监控、防盗报警", "封闭式"],
+        alts: [["门禁、视频监控、防盗报警", "门禁视频监控防盗报警", "门禁、监控、防盗报警", "门禁、监控、报警", "门禁、视频监控和防盗报警"], ["封闭式", "封闭"]],
+        source: "印制场所安防要求"
+      },
+      {
+        uid: "b_46",
+        num: 46,
+        type: "blank",
+        typeName: "填空题",
+        template: "视频监控应当安排人员值守，每月至少对视频监控信息进行回看检查{1}次，视频监控信息保存时间不少于{2}。",
+        answers: ["1", "3个月"],
+        alts: [["1", "1次", "一次"], ["3个月", "三个月", "3月"]],
+        source: "视频监控管理要求"
+      },
+      {
+        uid: "b_47",
+        num: 47,
+        type: "blank",
+        typeName: "填空题",
+        template: "严禁将{1}带入涉密业务场所。未经批准，不得擅自将具有录音、录像、拍照、{2}功能的电子设备带入涉密业务场所。",
+        answers: ["录像", "存储、通信"],
+        alts: [["录像", "摄像", "手机"], ["存储、通信", "存储通信", "存储和通信", "通信存储"]],
+        source: "电子设备管控规定"
+      },
+      {
+        uid: "b_48",
+        num: 48,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密业务场所应当确定人员进入范围，非授权人员进入应当履行{1}、{2}手续，并由接待人员{3}。对进入涉密业务场所的{4}，应当采取相应的保密管理措施。",
+        answers: ["审批", "登记", "全程陪同", "工勤服务人员"],
+        alts: [["审批"], ["登记"], ["全程陪同", "全程陪护"], ["工勤服务人员", "工勤人员"]],
+        source: "涉密场所出入管理"
+      },
+      {
+        uid: "b_49",
+        num: 49,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密印制业务应当实行{1}管理，明确岗位责任，落实各个环节安全保密措施，确保管理全程{2}。",
+        answers: ["全过程", "可控可查"],
+        alts: [["全过程", "全流程"], ["可控可查", "可控、可查"]],
+        source: "涉密印制全程可控"
+      },
+      {
+        uid: "b_50",
+        num: 50,
+        type: "blank",
+        typeName: "填空题",
+        template: "涉密印制业务应当建立{1}，台账保存时间不少于{2}。",
+        answers: ["管理台账", "3年"],
+        alts: [["管理台账", "台账"], ["3年", "三年", "3"]],
+        source: "台账留存要求"
+      },
+
+      /* ---------------- 二、判断题 (共20题) ---------------- */
+      {
+        uid: "j_1",
+        num: 1,
+        type: "judge",
+        typeName: "判断题",
+        statement: "任何组织和个人都不得将涉密计算机、涉密存储设备接入互联网或其他公共信息网络。",
+        answer: true,
+        hint: "思考涉密设备是否允许物理或逻辑连接公网？保密法实行严格的物理隔离要求。",
+        explanation: "正确。《保密法》明确规定：严禁将涉密计算机、涉密存储设备接入互联网及其他公共信息网络，实行彻底的物理隔离。"
+      },
+      {
+        uid: "j_2",
+        num: 2,
+        type: "judge",
+        typeName: "判断题",
+        statement: "在涉密计算机和非涉密计算机之间交叉使用U盘、移动硬盘等移动存储介质时，只要及时升级杀毒软件病毒库，就不会造成泄密。",
+        answer: false,
+        hint: "杀毒软件能彻底防止间谍摆渡木马和数据物理拷贝吗？介质交叉使用是第一大泄密隐患。",
+        explanation: "错误。杀毒软件无法防范专门的物理摆渡木马和越权拷贝，国家法规严禁在涉密和非涉密计算机间交叉混用移动存储介质。"
+      },
+      {
+        uid: "j_3",
+        num: 3,
+        type: "judge",
+        typeName: "判断题",
+        statement: "资质单位印制国家秘密载体需要与其他单位合作完成的，只要取得委托方书面同意，合作单位可以不具有相应资质。",
+        answer: false,
+        hint: "合作单位本身是否必须具备相应的涉密印制资质？资质是法定前置准入门槛。",
+        explanation: "错误。合作单位必须同时具备相应的涉密印制资质，并且必须取得委托方的书面同意，二者缺一不可。"
+      },
+      {
+        uid: "j_4",
+        num: 4,
+        type: "judge",
+        typeName: "判断题",
+        statement: "任何人不得通过普通邮政、快递等无保密措施的渠道传递国家秘密载体；禁止在私人交往和通信中涉及国家秘密。",
+        answer: true,
+        hint: "普通快递以及微信、电话等私人通信是否能够传递或谈论秘密？",
+        explanation: "正确。传递涉密载体必须通过机要交通、机要通信渠道，严禁通过普通邮递传递，严禁在私人交往中涉及国家秘密。"
+      },
+      {
+        uid: "j_5",
+        num: 5,
+        type: "judge",
+        typeName: "判断题",
+        statement: "禁止非法复制、记录、存储国家秘密。通过互联网或其他公用信息网络传递国家秘密时，必须确保已经采取必要的保密措施。",
+        answer: false,
+        hint: "后半句“通过互联网传递国家秘密时采取保密措施”是否被法律允许？公网无论如何都不准传密！",
+        explanation: "错误。严禁通过互联网或公用信息网络传递国家秘密，即便加密或采取其他保密措施也属严重违法。"
+      },
+      {
+        uid: "j_6",
+        num: 6,
+        type: "judge",
+        typeName: "判断题",
+        statement: "“业务工作谁主管，保密工作谁负责”是开展保密工作的重要原则。",
+        answer: true,
+        hint: "这是我国保密工作法定核心责任制原则之一。",
+        explanation: "正确。“业务工作谁主管，保密工作谁负责”是保密责任制的核心要求。"
+      },
+      {
+        uid: "j_7",
+        num: 7,
+        type: "judge",
+        typeName: "判断题",
+        statement: "配偶、子女和本人都是涉密人员，在家庭中互相谈论涉密事项是允许的。",
+        answer: false,
+        hint: "家庭属于非涉密场所，且各人知悉范围不同，即便全家都是涉密人员也不能随意串密。",
+        explanation: "错误。涉密知悉范围严格限定在最小范围，涉密人员不得在非涉密场所谈论国家秘密，非知悉范围严禁私下交流。"
+      },
+      {
+        uid: "j_8",
+        num: 8,
+        type: "judge",
+        typeName: "判断题",
+        statement: "文件、资料汇编中有涉密文件的，应当对涉密文件的密级和保密期限单独作出标志，并在封面或者首页以其中的最高密级和最长保密期限作出标志。",
+        answer: true,
+        hint: "汇编涉密材料的密级和期限应当“就高就长”标注吗？",
+        explanation: "正确。汇编涉密文件资料时，必须在封面或首页以其中的“最高密级”和“最长保密期限”作出标志。"
+      },
+      {
+        uid: "j_9",
+        num: 9,
+        type: "judge",
+        typeName: "判断题",
+        statement: "企业的技术成果被确定为国家秘密后，在保密期限内不得擅自解密或对外提供宣传。",
+        answer: true,
+        hint: "法定保密期限内的秘密成果能否擅自对外宣传公开？",
+        explanation: "正确。一旦确定为国家秘密，在法定保密期限内严禁擅自解密，未经法定审批不得对外宣传、转让或提供。"
+      },
+      {
+        uid: "j_10",
+        num: 10,
+        type: "judge",
+        typeName: "判断题",
+        statement: "U盘上的涉密信息，只要执行删除程序就无法恢复，可以在任意计算机上使用。",
+        answer: false,
+        hint: "常规“删除”只是清除了文件头索引，底层数据能轻易被数据恢复软件还原。",
+        explanation: "错误。常规删除根本无法销毁数据，涉密U盘严禁混用到非涉密计算机上。"
+      },
+      {
+        uid: "j_11",
+        num: 11,
+        type: "judge",
+        typeName: "判断题",
+        statement: "在保密通信措施不足或故障的情况下，允许在无保密措施的电话中传递国家秘密。",
+        answer: false,
+        hint: "应急或故障情况下能否降低保密标准用普通电话传密？",
+        explanation: "错误。任何紧急情况下都严禁在无保密措施的普通电话中传递国家秘密，必须坚守保密红线。"
+      },
+      {
+        uid: "j_12",
+        num: 12,
+        type: "judge",
+        typeName: "判断题",
+        statement: "因运转移动资料等紧急工作需要，可以使用私人计算机处理涉密文件，但要与国际互联网断开连接，待处理完涉密信息后可与互联网再相连。",
+        answer: false,
+        hint: "严禁使用私人设备处理涉密文件，即便是断网处理后重新联网也构成严重违规留存。",
+        explanation: "错误。严禁使用非涉密计算机特别是个人私人计算机处理涉密信息，断网后处理再联网是典型的违规行为，极易被木马回传泄密。"
+      },
+      {
+        uid: "j_13",
+        num: 13,
+        type: "judge",
+        typeName: "判断题",
+        statement: "音像制品涉及国家秘密的，应当按涉密资料保管。",
+        answer: true,
+        hint: "涉及国家秘密的光盘、录音带、录像带等是否属于涉密载体？",
+        explanation: "正确。涉及国家秘密的录音、录像等音像制品均属于涉密载体，必须严格按照涉密资料标准进行登记和保管。"
+      },
+      {
+        uid: "j_14",
+        num: 14,
+        type: "judge",
+        typeName: "判断题",
+        statement: "经审查合格，进入涉密岗位的人员须按规定签订保密责任书或承诺书，承担相应的保密责任。",
+        answer: true,
+        hint: "签订保密责任书/承诺书是涉密人员上岗的必经法定程序。",
+        explanation: "正确。涉密人员上岗前必须经过严格审查，通过保密教育培训并签订保密承诺书/责任书。"
+      },
+      {
+        uid: "j_15",
+        num: 15,
+        type: "judge",
+        typeName: "判断题",
+        statement: "涉密人员与境外人员通婚或者接受境外机构、组织资助的应当向单位报告。",
+        answer: true,
+        hint: "涉外通婚和接受境外资助属于涉密人员重大个人报告事项。",
+        explanation: "正确。涉密人员与境外人员通婚、接受境外机构资助属于重大个人事项，必须如实向单位保密部门报告。"
+      },
+      {
+        uid: "j_16",
+        num: 16,
+        type: "judge",
+        typeName: "判断题",
+        statement: "涉密人员本人或者直系亲属获得境外永久居留权以及取得外国国籍的应当向单位报告。",
+        answer: true,
+        hint: "涉密人员本人或直系亲属涉外移民、绿卡、国籍变更属于重点监督报告事项。",
+        explanation: "正确。涉密人员本人及配偶、直系亲属取得外国国籍或境外永久居留资格必须及时向单位报告。"
+      },
+      {
+        uid: "j_17",
+        num: 17,
+        type: "judge",
+        typeName: "判断题",
+        statement: "涉密人员在脱密期内不得在境外驻华机构或外商独资企业工作，但可以为境外组织或人员提供劳务咨询或其他服务。",
+        answer: false,
+        hint: "脱密期内允许给境外组织提供咨询或服务吗？这是严格禁止的就业限制。",
+        explanation: "错误。脱密期内严格执行从业限制，严禁为境外组织或人员提供劳务、咨询或任何服务。"
+      },
+      {
+        uid: "j_18",
+        num: 18,
+        type: "judge",
+        typeName: "判断题",
+        statement: "涉密人员脱密期内可以自由因私出境。",
+        answer: false,
+        hint: "脱密期内的涉密人员出国（境）能否“自由”出境？必须严格履行审批程序！",
+        explanation: "错误。脱密期内的人员因私出国（境）仍然实行严格的统一管理和审批程序，绝不能自由出境。"
+      },
+      {
+        uid: "j_19",
+        num: 19,
+        type: "judge",
+        typeName: "判断题",
+        statement: "涉密人员离开涉密岗位后，就不再对本人在原涉密岗位上知悉的国家秘密事项承担保密义务。",
+        answer: false,
+        hint: "保密义务是岗位结束就终止，还是终身承担？",
+        explanation: "错误。涉密人员离岗离职后，对其在岗期间知悉的国家秘密依然承担终身保密义务，直到秘密解密为止。"
+      },
+      {
+        uid: "j_20",
+        num: 20,
+        type: "judge",
+        typeName: "判断题",
+        statement: "对出境后可能对国家安全造成危害或者对国家利益造成重大损失的涉密人员，不得批准出境。",
+        answer: true,
+        hint: "《出境入境管理法》和《保密法》明确规定存在安全危害隐患时不予批准出境。",
+        explanation: "正确。《中华人民共和国出境入境管理法》与《保密法》明确规定：对出境后可能对国家安全造成危害或者对国家利益造成重大损失的涉密人员，不得批准出境。"
+      },
+      {
+        uid: "j_21",
+        num: 21,
+        type: "judge",
+        typeName: "判断题",
+        statement: "国家秘密知悉范围定得越宽，密级越高，越有利于国家秘密的安全。",
+        answer: false,
+        hint: "国家秘密知悉范围应当“最小化”限定，知悉范围越宽风险越大。",
+        explanation: "错误。国家秘密的知悉范围应当根据工作需要限定在最小范围，知悉范围越宽，泄密隐患越大。"
+      },
+      {
+        uid: "j_22",
+        num: 22,
+        type: "judge",
+        typeName: "判断题",
+        statement: "国家秘密的标志为★，★前标注密级，★后标注保密期限。",
+        answer: true,
+        hint: "国家秘密的标准标注形式为：密级★期限，例如“机密★10年”。",
+        explanation: "正确。国家秘密的标志为五角星★，★前标注密级（如绝密、机密、秘密），★后标注保密期限。"
+      },
+      {
+        uid: "j_23",
+        num: 23,
+        type: "judge",
+        typeName: "判断题",
+        statement: "摘录、引用涉密文件中属于国家秘密的内容，应当以其中最高密级和最长保密期限作出标志。",
+        answer: true,
+        hint: "摘录引用涉密内容，遵循“就高就长”的保密标注原则。",
+        explanation: "正确。摘录、引用涉密文件内容，应当以涉及内容的最高密级和最长保密期限作出密级标志。"
+      },
+      {
+        uid: "j_24",
+        num: 24,
+        type: "judge",
+        typeName: "判断题",
+        statement: "国家秘密事项的密级和保密期限一经确定，就不能更改。",
+        answer: false,
+        hint: "形势或情况发生变化时，密级和期限是否允许变更或解密？",
+        explanation: "错误。机关、单位应当定期审核所确定的国家秘密。情况发生变化时，应当及时变更密级、保密期限或者解密。"
+      },
+      {
+        uid: "j_25",
+        num: 25,
+        type: "judge",
+        typeName: "判断题",
+        statement: "国家秘密的保密期限，除有特殊规定外，绝密级事项不超过20年，机密级事项不超过10年，秘密级事项不超过5年。",
+        answer: false,
+        hint: "思考保密法规定的标准年限：绝密最长几年？机密几年？秘密几年？",
+        explanation: "错误。法定最长保密期限为：绝密级事项不超过30年，机密级事项不超过20年，秘密级事项不超过10年。"
+      },
+      {
+        uid: "j_26",
+        num: 26,
+        type: "judge",
+        typeName: "判断题",
+        statement: "复制绝密级涉密载体应当履行审批手续，经本机关或本单位负责人批准，加盖复制戳记，视同原件管理，并进行登记。",
+        answer: false,
+        hint: "绝密级载体极其特殊，本单位领导能自行批准复制吗？须经原定密机关单位或其上级机关批准！",
+        explanation: "错误。复制绝密级涉密载体必须经原定密机关、单位或者其上级机关批准，本单位无权擅自批准复制。"
+      },
+      {
+        uid: "j_27",
+        num: 27,
+        type: "judge",
+        typeName: "判断题",
+        statement: "普通手机处于关机或者无电量状态下，不存在泄密隐患。",
+        answer: false,
+        hint: "手机处于关机状态能否带入涉密场所？关机仍可能被特定后门技术激活拾音或被定位。",
+        explanation: "错误。普通手机即使在关机或无电状态下，部分机型仍可能被远程恶意控制激活或定位，严禁带入涉密业务场所。"
+      },
+      {
+        uid: "j_28",
+        num: 28,
+        type: "judge",
+        typeName: "判断题",
+        statement: "因工作需要随身携带密件、密品外出时，不得进入购物、餐饮娱乐等公共场所。",
+        answer: true,
+        hint: "密件外出携带期间，严禁进入与公务无关的人员密集公共场所。",
+        explanation: "正确。携带密品密件外出期间必须寸步不离，严禁携带密件出入商场、饭店、娱乐场所等公共场所。"
+      },
+      {
+        uid: "j_29",
+        num: 29,
+        type: "judge",
+        typeName: "判断题",
+        statement: "涉密存储介质经文件删除并格式化处理后，仍不得作为非密介质使用。",
+        answer: true,
+        hint: "删除和快速格式化能否保证数据彻底无法恢复？涉密介质不得降密混用。",
+        explanation: "正确。常规删除和格式化无法彻底销毁数据，涉密介质具有保密属性，严禁作为非密介质或在非涉密电脑上使用。"
+      },
+      {
+        uid: "j_30",
+        num: 30,
+        type: "judge",
+        typeName: "判断题",
+        statement: "涉密计算机和移动存储介质未经国家指定的专业销毁点销毁，不得自行淘汰处理。",
+        answer: true,
+        hint: "涉密设备的淘汰销毁必须送到保密行政管理部门指定的专业销毁机构。",
+        explanation: "正确。报废涉密设备必须送交保密行政管理部门设立的涉密载体销毁机构集中销毁，严禁私自变卖或自行丢弃淘汰。"
+      },
+      {
+        uid: "j_31",
+        num: 31,
+        type: "judge",
+        typeName: "判断题",
+        statement: "在涉密场所使用的与国际互联网或者其他公共网络连接的计算机不得安装视频、音频等输入装置。",
+        answer: true,
+        hint: "涉密场所内的外网电脑若装有麦克风或摄像头，易被黑客远程开启窃听窃照涉密环境。",
+        explanation: "正确。涉密场所内连接互联网的计算机严禁安装摄像头、麦克风等音视频输入装置，防止环境被非法监听偷拍。"
+      },
+      {
+        uid: "j_32",
+        num: 32,
+        type: "judge",
+        typeName: "判断题",
+        statement: "召开涉及国家秘密的会议，使用无线扩音、通信设备不能把音量开得太大。",
+        answer: false,
+        hint: "涉密会议能否使用无线麦克风/无线音响？无线信号极易在建筑物外被无线电截收！",
+        explanation: "错误。召开涉密会议严禁使用无线扩音、无线话筒等无线通信设备（极易被无线截收窃听），而不仅仅是音量大小问题。"
+      },
+      {
+        uid: "j_33",
+        num: 33,
+        type: "judge",
+        typeName: "判断题",
+        statement: "在对外交往与合作中急需提供国家秘密事项的，可以先提供，后补办手续。",
+        answer: false,
+        hint: "对外提供国家秘密能否“先斩后奏”？必须严格事先审批。",
+        explanation: "错误。对外交往与合作中对外提供国家秘密，必须严格按照法定程序事先审批，绝不允许“先提供后补办”。"
+      },
+      {
+        uid: "j_34",
+        num: 34,
+        type: "judge",
+        typeName: "判断题",
+        statement: "报告泄密事件应当包括被泄露国家秘密的内容、密级、数量及其载体形式、事件发现经过、责任人基本情况、发生的时间、地点及经过。",
+        answer: true,
+        hint: "泄密事件报告的基本要素齐全性要求。",
+        explanation: "正确。发生泄密事件时应当及时向上级和保密部门如实报告全面要素，包括内容密级、载体形式、责任人及事件经过等。"
+      },
+      {
+        uid: "j_35",
+        num: 35,
+        type: "judge",
+        typeName: "判断题",
+        statement: "未经保密审查的单位从事涉密业务的，由保密行政管理部门责令停止违法行为；有违法所得的，保密行政管理部门应一并没收违法所得。",
+        answer: false,
+        hint: "注意行政部门执法权限划分，保密行政管理部门责令停止违法行为，没收违法所得通常由市场监督管理等部门依法实施。",
+        explanation: "错误。依据相关法规，保密行政管理部门责令停止违法行为；对有违法所得的，由工商行政管理等执法部门没收违法所得。"
+      },
+      {
+        uid: "j_36",
+        num: 36,
+        type: "judge",
+        typeName: "判断题",
+        statement: "甲级资质单位可以在注册地省、自治区、直辖市行政区域内从事绝密级、机密级、秘密级涉密印制业务。",
+        answer: false,
+        hint: "甲级资质的地域范围是“全国”还是仅限“注册地省内”？",
+        explanation: "错误。甲级资质单位可以在“全国范围内”从事绝密、机密、秘密级涉密印制业务；乙级资质单位才限定在注册地行政区域内从事机密、秘密级业务。"
+      },
+      {
+        uid: "j_37",
+        num: 37,
+        type: "judge",
+        typeName: "判断题",
+        statement: "《资质证书》有效期满，需要继续从事涉密印制业务的，应当在期满后向做出审批决定的保密行政管理部门提出延续申请。",
+        answer: false,
+        hint: "延续申请应在“有效期满前3个月”提出，还是“期满后”？",
+        explanation: "错误。应当在有效期届满“3个月前”提出延续申请；期满后未申请的视为重新申请。"
+      },
+      {
+        uid: "j_38",
+        num: 38,
+        type: "judge",
+        typeName: "判断题",
+        statement: "甲级涉密印制资质单位的保密领导小组组长可以由法定代表人或者保密总监担任。",
+        answer: false,
+        hint: "保密工作领导小组组长必须由法定代表人（主要负责人）亲自担任，保密总监不可替代。",
+        explanation: "错误。资质单位保密工作领导小组组长必须由法定代表人或者主要负责人担任，不能由保密总监担任组长。"
+      },
+      {
+        uid: "j_39",
+        num: 39,
+        type: "judge",
+        typeName: "判断题",
+        statement: "确定、变更、调整涉密岗位和涉密人员，应当定期向注册地的省级保密行政管理部门备案。",
+        answer: true,
+        hint: "涉密岗位和人员实行台账动态管理并向省级保密局备案。",
+        explanation: "正确。涉密单位确定、变更涉密岗位及涉密人员，必须按期向注册地省级保密行政管理部门履行备案程序。"
+      },
+      {
+        uid: "j_40",
+        num: 40,
+        type: "judge",
+        typeName: "判断题",
+        statement: "在岗涉密人员每年参加保密教育与保密知识、技能培训的时间不少于10个学时。",
+        answer: true,
+        hint: "在岗涉密人员年度保密培训课时法定底线要求为10个学时。",
+        explanation: "正确。涉密人员在岗期间每年必须参加不少于10学时的保密专题教育与技能培训。"
+      },
+      {
+        uid: "j_41",
+        num: 41,
+        type: "judge",
+        typeName: "判断题",
+        statement: "甲级和乙级资质单位的保密管理经费均不得少于5万元。",
+        answer: false,
+        hint: "甲级与乙级标准是否不同？甲级要求更高。",
+        explanation: "错误。保密管理经费要求不同：甲级资质单位每年不得少于10万元，乙级资质单位不得少于5万元。"
+      },
+      {
+        uid: "j_42",
+        num: 42,
+        type: "judge",
+        typeName: "判断题",
+        statement: "被撤销资质的单位，在撤销决定下达前已签订有效合同的，在确保安全保密的情况下可以继续完成涉密印制业务。",
+        answer: false,
+        hint: "资质撤销后即刻丧失涉密印制法定资格，绝不能继续开展业务。",
+        explanation: "错误。撤销决定下达之日起，单位立即终止一切涉密印制业务，已签订合同也必须终止或移交。"
+      },
+      {
+        uid: "j_43",
+        num: 43,
+        type: "judge",
+        typeName: "判断题",
+        statement: "涉密信息设备的维修，应当一律在本单位内部进行。",
+        answer: false,
+        hint: "注意“一律”字眼，确需送外维修拆除存储部件并全程监督是否被允许？",
+        explanation: "错误。原则上在本单位内部进行，但确需送外维修的，在拆除涉密存储部件并指定专人全程监督下可送外维修，并非绝对“一律”。"
+      },
+      {
+        uid: "j_44",
+        num: 44,
+        type: "judge",
+        typeName: "判断题",
+        statement: "发生泄密事件的机关、单位不及时上报或隐匿不报的，视情节和造成的后果追究有关人员或负责人的责任。",
+        answer: true,
+        hint: "迟报、瞒报泄密事件属于严重违法违纪行为，必追究当事人及主管领导责任。",
+        explanation: "正确。发生泄密隐匿不报或拖延不报的，依照保密法对直接负责的主管人员和其他直接责任人员依法给予处分并追责。"
+      },
+      {
+        uid: "j_45",
+        num: 45,
+        type: "judge",
+        typeName: "判断题",
+        statement: "有3年以上印制业务经验的单位即可申请甲级国家秘密载体印制资质。",
+        answer: false,
+        hint: "甲级涉密印制资质门槛高，通常需取得乙级资质满一定年限或更严格的准入条件。",
+        explanation: "错误。申请甲级资质有严格资质进阶与年限要求，并非仅凭普通3年印制经验即可直接申请甲级资质。"
+      },
+      {
+        uid: "j_46",
+        num: 46,
+        type: "judge",
+        typeName: "判断题",
+        statement: "资质单位存在欺瞒、贿赂等不正当手段取得资质情形的，保密行政管理部门应当撤销其资质，停止其涉密业务。",
+        answer: true,
+        hint: "通过欺骗、贿赂等不正当手段骗取资质的，依法一律予以撤销。",
+        explanation: "正确。行政许可法与保密法规明确规定：以欺骗、贿赂等不正当手段取得涉密资质的，保密部门应当依法予以撤销。"
+      },
+      {
+        uid: "j_47",
+        num: 47,
+        type: "judge",
+        typeName: "判断题",
+        statement: "机关、单位内部经营性印刷厂、文印中心承担本机关、单位涉密印制业务的，可不申请涉密印制资质。",
+        answer: true,
+        hint: "单位内部自用的内设文印室/印刷厂承担内部涉密业务，属于内部管理行为，不适用对外许可。",
+        explanation: "正确。机关单位内部机构仅承担本机关单位涉密印制业务且不对外经营的，按机关内部保密管理执行，无需申领涉密印制资质证书。"
+      },
+      {
+        uid: "j_48",
+        num: 48,
+        type: "judge",
+        typeName: "判断题",
+        statement: "存在现场审查基本项情形的，应当加重扣分。",
+        answer: false,
+        hint: "基本项不符合要求是一票否决（不予通过审查），并非简单的“加重扣分”。",
+        explanation: "错误。保密资质审查标准中，基本项为必要达标项，若不符合要求则直接判定现场审查不合格（一票否决），而不是通过扣分处理。"
+      },
+      {
+        uid: "j_49",
+        num: 49,
+        type: "judge",
+        typeName: "判断题",
+        statement: "高密级的移动存储介质禁止在低密级的计算机上使用。",
+        answer: true,
+        hint: "介质与设备密级必须匹配，“就高不就低”，防止降密泄密。",
+        explanation: "正确。高密级移动存储介质严禁连接低密级计算机使用，防止高密级涉密信息被低防护设备非法读取或泄露。"
+      },
+      {
+        uid: "j_50",
+        num: 50,
+        type: "judge",
+        typeName: "判断题",
+        statement: "严禁将用于处理国家秘密信息的具有打印、复印、传真等多功能的一体机与普通电话连接。",
+        answer: true,
+        hint: "一体机若连接普通电话线，等于将涉密设备与公用通信网连通，构成极度危险的违规外联。",
+        explanation: "正确。处理涉密信息的多功能一体机严禁连接电话线路，防止涉密数据通过调制解调器或通信通道外泄。"
+      },
+
+      /* ---------------- 三、单项选择题 (共27题) ---------------- */
+      {
+        uid: "c_1",
+        num: 1,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "一切国家机关、武装力量、政党、社会团体、（ ）都有保守国家秘密的义务。",
+        options: [{"key":"A","text":"国家公务员"},{"key":"B","text":"共产党员"},{"key":"C","text":"企业事业单位和公民"}],
+        answer: "C",
+        hint: "宪法与保密法规定：保密是全体公民和所有企事业单位的法定义务。",
+        explanation: "《中华人民共和国宪法》第五十三条及《保密法》明确规定：一切国家机关、武装力量、政党、社会团体、企业事业单位和公民都有保守国家秘密的义务。"
+      },
+      {
+        uid: "c_2",
+        num: 2,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "各级机关、单位对产生的国家秘密事项，应当按照（ ）及时确定密级。",
+        options: [{"key":"A","text":"保密法实施办法"},{"key":"B","text":"保密规章制度"},{"key":"C","text":"国家秘密及其密级具体范围的规定"}],
+        answer: "C",
+        hint: "定密必须严格对照国家行业主管部门制定的“定密范围”规定。",
+        explanation: "机关、单位对产生的国家秘密事项，应当按照《国家秘密及其密级具体范围的规定》确定密级，同时确定保密期限和知悉范围。"
+      },
+      {
+        uid: "c_3",
+        num: 3,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "一份文件为机密级，保密期限是10年，应当标注为（ ）。",
+        options: [{"key":"A","text":"机密10年"},{"key":"B","text":"10年★机密"},{"key":"C","text":"机密★10年"}],
+        answer: "C",
+        hint: "国家秘密标志格式规范：★前标密级，★后标期限。",
+        explanation: "国家秘密标志规范为五角星★，前标密级（绝密、机密、秘密），后标保密期限，因此正确标注为“机密★10年”。"
+      },
+      {
+        uid: "c_4",
+        num: 4,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "某文件标注“绝密★”，标识该文件保密期限为（ ）。",
+        options: [{"key":"A","text":"30年"},{"key":"B","text":"20年"},{"key":"C","text":"长期"}],
+        answer: "A",
+        hint: "未标具体年限的，绝密级按法定最长保密期限计算。",
+        explanation: "国家秘密的保密期限未标明的，绝密级事项按最长不超过30年计算，机密级不超过20年，秘密级不超过10年。"
+      },
+      {
+        uid: "c_5",
+        num: 5,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "涉密人员离岗离职前，应当将所保管和使用的涉密载体全部清退，并（ ）。",
+        options: [{"key":"A","text":"登记销毁"},{"key":"B","text":"订卷归档"},{"key":"C","text":"办理移交手续"}],
+        answer: "C",
+        hint: "涉密人员调离或退休时，交接载体必须形成规范书面移交手续。",
+        explanation: "涉密人员离岗离职前，应当清退保管和使用的涉密载体及涉密信息设备，并办理严格的移交手续。"
+      },
+      {
+        uid: "c_6",
+        num: 6,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "变更密级或解密，应由（ ）。",
+        options: [{"key":"A","text":"密件使用单位决定"},{"key":"B","text":"原定密机关、单位决定，也可以由其上级机关决定"},{"key":"C","text":"国家保密行政管理部门制定的单位决定"}],
+        answer: "B",
+        hint: "“谁定密，谁变更；谁定密，谁解密”，原定密机关及其上级机关具有法定权限。",
+        explanation: "《保密法》规定：国家秘密的密级、保密期限和知悉范围的变更以及解密，由原定密机关、单位决定，也可以由其上级机关决定。"
+      },
+      {
+        uid: "c_7",
+        num: 7,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "传递绝密级涉密载体，（ ）。",
+        options: [{"key":"A","text":"只能通过机要交通递送"},{"key":"B","text":"只能通过机要通信递送"},{"key":"C","text":"必须通过机要交通、机要通信或派人直接递送"}],
+        answer: "C",
+        hint: "机要交通、机要通信或者单位派专人直接递送均属合法法定途径。",
+        explanation: "传递绝密级秘密载体，应当通过机要交通、机要通信递送，或者派专人直接递送，且必须两人同行并采取严格保密措施。"
+      },
+      {
+        uid: "c_8",
+        num: 8,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "销毁秘密文件、资料要履行（ ）手续，并由两名以上工作人员到指定场所监销。",
+        options: [{"key":"A","text":"审批、登记"},{"key":"B","text":"交接"},{"key":"C","text":"清点"}],
+        answer: "A",
+        hint: "密件销毁必须事前履行审批审批，并登记造册。",
+        explanation: "销毁国家秘密载体应当履行严格的审批、登记手续，由二人以上监销并送交保密行政管理部门设立的销毁机构。"
+      },
+      {
+        uid: "c_9",
+        num: 9,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "储存国家秘密信息的介质，应按所储存信息的（ ）密级标明密级，并按相应的密级文件进行管理。",
+        options: [{"key":"A","text":"最高"},{"key":"B","text":"最低"},{"key":"C","text":"相应"}],
+        answer: "A",
+        hint: "混合存储时遵循“就高不就低”的最高密级管控原则。",
+        explanation: "介质中存储有不同密级信息的，必须按照其中最高的密级标明介质密级并实行相应等级防护。"
+      },
+      {
+        uid: "c_10",
+        num: 10,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "涉密计算机信息系统不得与国际互联网或其他公共信息网络连接，必须实行（ ）。",
+        options: [{"key":"A","text":"防火墙隔离"},{"key":"B","text":"物理隔离"},{"key":"C","text":"逻辑隔离"}],
+        answer: "B",
+        hint: "非物理隔离的逻辑/防火墙隔离存在被穿透攻击风险，必须彻底物理断开。",
+        explanation: "涉密信息系统与互联网及公共网络之间必须实行物理隔离，严禁逻辑隔离或通过防火墙直接相连。"
+      },
+      {
+        uid: "c_11",
+        num: 11,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "储存过国家秘密的信息介质可以（ ）密级使用。",
+        options: [{"key":"A","text":"提高"},{"key":"B","text":"降低"},{"key":"C","text":"解除"}],
+        answer: "A",
+        hint: "涉密介质只能就高，严禁降密或解密作为非密介质混用。",
+        explanation: "涉密存储介质不得降级使用，也不得作为非密介质使用；但经严格审批可以提高密级使用。"
+      },
+      {
+        uid: "c_12",
+        num: 12,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "违反《中华人民共和国保守国家秘密法》的规定，（ ）泄露国家秘密，情节严重的，依照刑法有关规定追究刑事责任。",
+        options: [{"key":"A","text":"故意"},{"key":"B","text":"故意或过失"},{"key":"C","text":"过失"}],
+        answer: "B",
+        hint: "刑法中既包含故意泄露国家秘密罪，也包含过失泄露国家秘密罪。",
+        explanation: "刑法第三百九十八条规定：国家机关工作人员违反保守国家秘密法的规定，故意或者过失泄露国家秘密，情节严重的均构成犯罪。"
+      },
+      {
+        uid: "c_13",
+        num: 13,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "某涉密人员外出时提包被窃，找回后发现包内钱物丢失，泄密文件完整无缺。这一事件（ ）。",
+        options: [{"key":"A","text":"属于泄密事件"},{"key":"B","text":"不应视为泄密事件"},{"key":"C","text":"在不能证明文件未被不知悉者知悉时，按泄密事件处理"}],
+        answer: "C",
+        hint: "脱离有效控制状态下，除非能确凿证实未被外人翻阅知悉，否则一律推定为泄密事件。",
+        explanation: "涉密载体离开涉密人员控制范围，如果无法确凿证明未经不知悉人员接触或拍摄知悉的，一律按照泄密事件调查处理。"
+      },
+      {
+        uid: "c_14",
+        num: 14,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "过失泄露绝密级（ ）件、机密级（ ）件或秘密级（ ）件的，应予立案。",
+        options: [{"key":"A","text":"1, 2, 3"},{"key":"B","text":"1, 3, 3"},{"key":"C","text":"1, 3, 4"}],
+        answer: "C",
+        hint: "立案追责标准：绝密1件，机密3件，秘密4件。",
+        explanation: "司法解释立案标准：泄露绝密级国家秘密1件（项）以上，机密级3件（项）以上，或者秘密级4件（项）以上的应予立案追究刑事责任。"
+      },
+      {
+        uid: "c_15",
+        num: 15,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "现行《中华人民共和国保守国家秘密法》是由第11届全国人大常委会第十四次会议于（ ）修订通过的。",
+        options: [{"key":"A","text":"1988年9月5日"},{"key":"B","text":"2010年4月29日"},{"key":"C","text":"2010年10月1日"}],
+        answer: "B",
+        hint: "注意题目问的是“修订通过”的时间，而不是“施行”时间（施行是10月1日）。",
+        explanation: "该法于2010年4月29日修订通过，自2010年10月1日起施行。"
+      },
+      {
+        uid: "c_16",
+        num: 16,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "国家秘密的本质属性是（ ）。",
+        options: [{"key":"A","text":"依照法律程序而定"},{"key":"B","text":"关系国家安全和利益"},{"key":"C","text":"只限一定单位的人员知悉"}],
+        answer: "B",
+        hint: "“关系国家安全和利益”是国家秘密最核心的实质要素。",
+        explanation: "国家秘密是关系国家安全和利益的事项，这是国家秘密的本质属性。"
+      },
+      {
+        uid: "c_17",
+        num: 17,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "下列不属于我国刑法规定的保守国家秘密有关罪名的是（ ）。",
+        options: [{"key":"A","text":"奸细罪"},{"key":"B","text":"为境外的机构、组织、人员非法提供国家秘密罪"},{"key":"C","text":"非法获取、持有国家秘密罪"}],
+        answer: "A",
+        hint: "我国刑法中无“奸细罪”这一罪名，而是以“间谍罪”或非法提供国家秘密等罪名定罪。",
+        explanation: "我国现行刑法没有“奸细罪”的罪名表述。"
+      },
+      {
+        uid: "c_18",
+        num: 18,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "某文件为秘密级，该文件的保密期限最长可以确定为（ ）。",
+        options: [{"key":"A","text":"24个月"},{"key":"B","text":"5年"},{"key":"C","text":"10年"}],
+        answer: "C",
+        hint: "法定年限：绝密最长30年，机密最长20年，秘密最长10年。",
+        explanation: "秘密级事项保密期限最长不得超过10年。"
+      },
+      {
+        uid: "c_19",
+        num: 19,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "涉密打印机与涉密计算机之间（ ）。",
+        options: [{"key":"A","text":"采用无线连接方式应当严格遵守规定"},{"key":"B","text":"可以采用无线连接方式"},{"key":"C","text":"不能采用无线连接方式"}],
+        answer: "C",
+        hint: "涉密设备之间严禁使用WiFi、蓝牙等任何无线连接方式。",
+        explanation: "涉密打印机与涉密计算机之间必须采用专用有线屏蔽连接，绝对不能采用无线方式连接。"
+      },
+      {
+        uid: "c_20",
+        num: 20,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "以下不属于侵犯国家秘密犯罪的是（ ）。",
+        options: [{"key":"A","text":"为境外窃取、刺探、收买、非法提供国家秘密、情报罪"},{"key":"B","text":"非法侵入计算机信息系统罪"},{"key":"C","text":"非法获取国家秘密罪"}],
+        answer: "B",
+        hint: "“非法侵入计算机信息系统罪”侵害的客体是计算机信息系统安全，而非国家秘密安全。",
+        explanation: "非法侵入计算机信息系统罪属于扰乱公共秩序罪中的危害计算机网络安全犯罪，侵犯的同类客体不是国家秘密。"
+      },
+      {
+        uid: "c_21",
+        num: 21,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "涉密印制业务部门负责人对部门的保密管理负（ ）责任。",
+        options: [{"key":"A","text":"全面"},{"key":"B","text":"具体领导"},{"key":"C","text":"直接领导"}],
+        answer: "C",
+        hint: "法人代表负全面责任，分管领导负具体领导责任，业务部门负责人负直接领导责任。",
+        explanation: "保密管理责任分工：法定代表人负全面责任，分管领导（保密总监）负具体领导责任，业务部门负责人负直接领导责任。"
+      },
+      {
+        uid: "c_22",
+        num: 22,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "法定代表人或者主要负责人对本单位保密工作负（ ）责任。",
+        options: [{"key":"A","text":"全面"},{"key":"B","text":"具体领导"},{"key":"C","text":"直接领导"}],
+        answer: "A",
+        hint: "单位一把手/主要负责人对单位保密工作承担全面第一责任。",
+        explanation: "法定代表人是单位保密工作的第一责任人，对本单位保密工作负全面责任。"
+      },
+      {
+        uid: "c_23",
+        num: 23,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "保密总监对本单位保密工作负（ ）责任。",
+        options: [{"key":"A","text":"全面"},{"key":"B","text":"具体领导"},{"key":"C","text":"直接领导"}],
+        answer: "B",
+        hint: "作为领导班子成员的保密总监协助主要领导，承担具体领导分管责任。",
+        explanation: "保密总监为单位领导班子成员，协助法定代表人抓好保密工作，负具体领导责任。"
+      },
+      {
+        uid: "c_24",
+        num: 24,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "关于国家秘密载体销毁的程序及有关规定正确的是（ ）。",
+        options: [{"key":"A","text":"只要通过本单位主管部门审核批准，可立即进行销毁"},{"key":"B","text":"送销国家秘密载体，应当分类包装，送达保密行政管理部门指定的承销单位，无需派专人现场监销"},{"key":"C","text":"应将需要销毁的国家秘密载体送交销毁工作机构或者保密行政管理部门指定的承销单位销毁，并派出专人现场监销"}],
+        answer: "C",
+        hint: "必须送到指定销毁机构，且必须派专人到现场监销到底！",
+        explanation: "涉密载体销毁必须送交法定专业机构销毁，并且单位必须派出专人在现场监督销毁过程直至彻底毁形。"
+      },
+      {
+        uid: "c_25",
+        num: 25,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "收发涉密载体，应当履行完整的（ ）手续。",
+        options: [{"key":"A","text":"清点、登记、编号、签收等"},{"key":"B","text":"交接"},{"key":"C","text":"签字"}],
+        answer: "A",
+        hint: "收发闭环要求：清点、编号、登记、签收四步完整程序。",
+        explanation: "涉密载体收发必须履行清点、登记、编号、签收等完整手续，做到账物相符、轨迹可查。"
+      },
+      {
+        uid: "c_26",
+        num: 26,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "发生泄密事件应当迅速查明（ ），及时采取补救措施，并报告保密行政管理部门和上级领导机关。",
+        options: [{"key":"A","text":"主要、次要责任者"},{"key":"B","text":"被泄露国家秘密的内容和密级、造成或者可能造成的危害、事件的主要情节和有关责任者"},{"key":"C","text":"事件属于什么性质"}],
+        answer: "B",
+        hint: "查明内容必须全面周详：包括内容密级、危害程度、经过情节及责任人。",
+        explanation: "发生泄密事件应当迅速查清被泄露国家秘密的内容和密级、危害后果、主要情节和有关责任者，第一时间采取补救措施并上报。"
+      },
+      {
+        uid: "c_27",
+        num: 27,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "机关、单位应当加强对国家秘密载体的管理，任何组织和个人不得有下列哪些行为？（ ）\n①非法获取、持有国家秘密载体；\n②买卖、转送或者私自销毁国家秘密载体；\n③通过普通邮政、快递等无保密措施的渠道传递国家秘密载体；\n④邮寄、托运国家秘密载体出境；\n⑤未经保密部门批准，在境外查阅国家对秘密载体制订的法律条文；\n⑥未经有关主管部门批准，携带、传递国家秘密载体出境。",
+        options: [{"key":"A","text":"①②③④⑤⑥"},{"key":"B","text":"①②④⑤⑥"},{"key":"C","text":"①②③④⑥"}],
+        answer: "C",
+        hint: "法律条文是公开发布的法规，不需要保密部门审批查阅，因此⑤不属于违法行为。",
+        explanation: "国家制订的法律条文属于公开发布的法律法规，查阅法律法规无需批准；①②③④⑥均为保密法第四十八条明确禁止的严重违规违法行为。"
+      },
+      {
+        uid: "c_28",
+        num: 28,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "维修涉密信息设备，不应当（ ）。",
+        options: [{"key":"A","text":"送外维修时拆除涉密信息存储部件"},{"key":"B","text":"指定专人全程监督"},{"key":"C","text":"允许维修人员读取或复制涉密信息"}],
+        answer: "C",
+        hint: "保密底线：严禁任何维修人员私自读取、拷贝或复制涉密数据。",
+        explanation: "涉密信息设备维修应当在单位内部进行并专人全程监督；确需外修必须拆除存储部件，严禁维修人员读取或复制涉密信息。"
+      },
+      {
+        uid: "c_29",
+        num: 29,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "复制属于国家秘密的文件、资料或摘录、引用、汇编属于国家秘密内容形成的涉密载体，（ ）原件的密级、保密期限和知悉范围。",
+        options: [{"key":"A","text":"不得擅自改变"},{"key":"B","text":"可以根据情况改变"},{"key":"C","text":"可以改变"}],
+        answer: "A",
+        hint: "复制品必须视同原件严格管理，三个要素一律不得擅改。",
+        explanation: "复制、摘录、引用涉密文件形成的载体，不得擅自改变原件的密级、保密期限和知悉范围。"
+      },
+      {
+        uid: "c_30",
+        num: 30,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "如发生泄密案件或者可能泄露国家秘密案件，应当立即采取补救措施，并在发现后（ ）小时内书面向所在地保密行政管理部门报告。",
+        options: [{"key":"A","text":"48"},{"key":"B","text":"12"},{"key":"C","text":"24"}],
+        answer: "C",
+        hint: "保密事件法定时限：发现后24小时内书面报告。",
+        explanation: "发生泄密事件应当在发现后24小时内书面向所在地保密行政管理部门和有关上级机关报告。"
+      },
+      {
+        uid: "c_31",
+        num: 31,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "刑法第一百一十一条规定，为境外的机构、组织、人员窃取、刺探、收买、非法提供国家秘密或者情报的，情节特别严重的，处（ ）。",
+        options: [{"key":"A","text":"十年以上有期徒刑或无期徒刑"},{"key":"B","text":"五年以上十年以下有期徒刑"},{"key":"C","text":"三年以上七年以下有期徒刑"},{"key":"D","text":"三年以下有期徒刑"}],
+        answer: "A",
+        hint: "刑法第一百一十一条法定顶格刑罚：情节特别严重的处十年以上有期徒刑或无期徒刑。",
+        explanation: "《刑法》第一百一十一条规定：为境外窃取、刺探、收买、非法提供国家秘密情报罪，处五年以上十年以下；情节特别严重的，处十年以上有期徒刑或者无期徒刑。"
+      },
+      {
+        uid: "c_32",
+        num: 32,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "申请单位隐瞒有关情况或者提供虚假材料的，保密行政管理部门应当作出不予受理或者不予行政许可的决定。自不予受理或者不予行政许可之日起，（ ）内不得再次申请。",
+        options: [{"key":"A","text":"1年"},{"key":"B","text":"2年"},{"key":"C","text":"3年"}],
+        answer: "A",
+        hint: "提供虚假材料被不予受理的，限制申请期限为1年。",
+        explanation: "申请单位隐瞒真实情况或提供虚假材料导致不予许可的，自决定之日起1年内不得再次提出资质申请。"
+      },
+      {
+        uid: "c_33",
+        num: 33,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "资质单位采取欺骗、贿赂等不正当手段取得资质的，保密行政管理部门应当撤销其资质，停止其涉密业务。自撤销之日起，（ ）内不得再次申请。",
+        options: [{"key":"A","text":"1年"},{"key":"B","text":"2年"},{"key":"C","text":"3年"}],
+        answer: "C",
+        hint: "以欺诈贿赂骗取资质被撤销的，惩罚更重，限制期限为3年。",
+        explanation: "采取欺骗、贿赂等不正当手段取得资质被依法撤销的，自撤销之日起3年内不得再次申请资质。"
+      },
+      {
+        uid: "c_34",
+        num: 34,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "涉密人员现场审查保密知识测试存在作弊情形的，扣（ ）分；重大事项未报告的，扣（ ）分。",
+        options: [{"key":"A","text":"10, 5"},{"key":"B","text":"5, 10"},{"key":"C","text":"10, 10"}],
+        answer: "C",
+        hint: "作弊与重大事项未报告均属于严重违规，均顶格扣10分。",
+        explanation: "资质审查评分细则中，测试作弊扣10分，个人重大事项未按规定报告扣10分。"
+      },
+      {
+        uid: "c_35",
+        num: 35,
+        type: "choice",
+        typeName: "单项选择题",
+        question: "没有专门工作机构负责保密管理工作或者未按要求配备保密管理人员的，扣（ ）分。",
+        options: [{"key":"A","text":"2"},{"key":"B","text":"5"},{"key":"C","text":"10"}],
+        answer: "B",
+        hint: "机构人员未按要求配备的评分标准为扣5分。",
+        explanation: "资质现场审查评分标准明确：无专门保密管理机构或未按要求配备人员的，扣5分。"
+      },
+
+      /* ---------------- 四、多项选择题 (共11题) ---------------- */
+      {
+        uid: "m_1",
+        num: 1,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "我国现行保密法律制度体系主要包括：宪法、保密法律、（ ）以及国家公约或政府间的协定的相关规定等。",
+        options: [{"key":"A","text":"保密法规"},{"key":"B","text":"保密规章"},{"key":"C","text":"国家保密标准"},{"key":"D","text":"相关司法解释"}],
+        answer: ["A","B","C","D"],
+        hint: "保密制度体系涵盖了行政法规、部门规章、保密国家标准及最高法/最高检司法解释全套层级。",
+        explanation: "全选ABCD。我国保密法律制度体系层次完整，包括宪法、保密法律、保密行政法规、部门规章、国家保密技术标准、司法解释及涉外公约等。"
+      },
+      {
+        uid: "m_2",
+        num: 2,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "按照《保密法》第十八条的规定，国家秘密的变更指的是（ ）的变更。",
+        options: [{"key":"A","text":"密级"},{"key":"B","text":"保密期限"},{"key":"C","text":"知悉范围"},{"key":"D","text":"涉密内容"}],
+        answer: ["A","B","C"],
+        hint: "法条原文明确的“定密三要素”变更：密级、期限、知悉范围。",
+        explanation: "《保密法》第十八条明确规定：国家秘密的变更包括密级、保密期限和知悉范围的变更，不包括涉密内容本身。"
+      },
+      {
+        uid: "m_3",
+        num: 3,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "违反保密法律应当承担的责任包括（ ）。",
+        options: [{"key":"A","text":"行政责任"},{"key":"B","text":"刑事责任"},{"key":"C","text":"民事责任"},{"key":"D","text":"党纪处分"}],
+        answer: ["A","B","D"],
+        hint: "国家秘密保护属于公法与公权力范畴，违规承担行政处分、党纪处分或刑事责任，不涉及平等民事主体民事责任。",
+        explanation: "违反保密法律责任包括行政责任（政务处分/行政处罚）、刑事责任（触犯刑法）以及党纪处分，不属于民事责任。"
+      },
+      {
+        uid: "m_4",
+        num: 4,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "涉密信息系统发生下列何种情况时，应当按照国家保密规定及时向保密行政管理部门报告，并采取相应措施。（ ）",
+        options: [{"key":"A","text":"密级发生变化"},{"key":"B","text":"主要业务应用发生变化"},{"key":"C","text":"使用范围和使用环境发生变化"},{"key":"D","text":"不再使用"}],
+        answer: ["A","B","C","D"],
+        hint: "全生命周期动态监管：密级、业务、环境变化及废弃停用均须向保密局报告。",
+        explanation: "全选ABCD。涉密信息系统密级变更、主要业务应用调整、使用范围环境变动以及废弃停用，均须及时报保密行政管理部门并采取安全措施。"
+      },
+      {
+        uid: "m_5",
+        num: 5,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "从事涉密业务的企业事业单位应当具备下列条件（ ）。",
+        options: [{"key":"A","text":"在中华人民共和国境内依法成立3年以上的法人，无违法犯罪记录"},{"key":"B","text":"所有人员具有中华人民共和国国籍"},{"key":"C","text":"保密制度完善，有专门的机构或者人员负责保密工作，具有从事涉密业务的专业能力"},{"key":"D","text":"用于涉密业务的场所、设施、设备符合国家保密规定和标准"}],
+        answer: ["A","C","D"],
+        hint: "注意B选项“所有人员”过于绝对（法规要求从事涉密业务的人员必须具有中国国籍，并非企业所有普通员工）。",
+        explanation: "从事涉密业务的企事业单位必须依法成立3年以上法人无违法犯罪、制度机构健全、场所设施达标。从事涉密岗位人员须为中国国籍，但非企业全体非涉密人员。"
+      },
+      {
+        uid: "m_6",
+        num: 6,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "国家秘密载体印制资质申请单位在提交的申请材料中应当包括（ ）。",
+        options: [{"key":"A","text":"上年度企业年度报告"},{"key":"B","text":"《营业执照》复印件"},{"key":"C","text":"生产经营场所租赁合同复印件或办公场所产权证书复印件"},{"key":"D","text":"近三年印制业务合同清单"}],
+        answer: ["A","B","C","D"],
+        hint: "申请材料要求提供法人资格证明、场所产权证明、财务报表及过往业绩清单全套证明。",
+        explanation: "全选ABCD。申请涉密印制资质须提交企业年报、执照、经营场所权属/租赁凭证及近三年印制业绩合同清单等材料。"
+      },
+      {
+        uid: "m_7",
+        num: 7,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "申请哪类资质的单位不得有外国投资者投资？（ ）",
+        options: [{"key":"A","text":"涉密文件资料"},{"key":"B","text":"国家统一考试试卷"},{"key":"C","text":"涉密防伪票据证书"},{"key":"D","text":"涉密光电磁介质"},{"key":"E","text":"涉密档案数字化加工"}],
+        answer: ["A","D","E"],
+        hint: "红线要求：涉密文件资料(A)、涉密光电磁介质(D)、涉密档案数字化(E)绝对禁止任何外资投资！",
+        explanation: "《国家秘密载体印制资质管理办法》规定：从事涉密文件资料(A)、涉密光电磁介质(D)、涉密档案数字化加工(E)印制业务的单位，不得有外国投资者投资（零外资）。"
+      },
+      {
+        uid: "m_8",
+        num: 8,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "申请哪类资质的单位不得由外国投资者控股？（ ）",
+        options: [{"key":"A","text":"涉密文件资料"},{"key":"B","text":"国家统一考试试卷"},{"key":"C","text":"涉密防伪票据证书"},{"key":"D","text":"涉密光电磁介质"},{"key":"E","text":"涉密档案数字化加工"}],
+        answer: ["B","C"],
+        hint: "试卷印制(B)与防伪票据证书(C)为限制性门槛：不得由外商控股（中方必须保持绝对控股）。",
+        explanation: "从事国家统一考试试卷(B)、涉密防伪票据证书(C)印制业务的单位，不得由外国投资者控股，中方必须控股。"
+      },
+      {
+        uid: "m_9",
+        num: 9,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "资质单位存在下列哪些情形的，保密行政管理部门应当注销其资质。（ ）",
+        options: [{"key":"A","text":"《资质证书》有效期满未延续申请"},{"key":"B","text":"法人资格依法终止"},{"key":"C","text":"两年内未承担国家秘密载体印制业务"},{"key":"D","text":"资质变更未经批准"}],
+        answer: ["A","B"],
+        hint: "注销法定情形：期满未延续(A)或法人资格终止消亡(B)；其他情形属于撤销或责令整改。",
+        explanation: "资质注销属于行政许可自然终止情形，包括《资质证书》有效期届满未申请延续、单位法人资格依法终止等（选AB）。"
+      },
+      {
+        uid: "m_10",
+        num: 10,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "以下关于保密管理办公室说法不正确的是（ ）。",
+        options: [{"key":"A","text":"资质单位均应当设立保密管理办公室"},{"key":"B","text":"保密管理办公室为资质单位的职能部门"},{"key":"C","text":"保密管理办公室负责人应由资质单位高级管理人员担任"},{"key":"D","text":"资质单位保密管理办公室均应当配备专门保密管理人员"}],
+        answer: ["C","D"],
+        hint: "注意题目问的是“不正确”的选项：C项负责人由中层以上担任（非高级）；D项专兼职根据甲乙级资质规模区分。",
+        explanation: "法规规定保密办负责人由“中层以上管理人员”担任而非必须高级管理人员；甲级配备专职保密员，乙级可配备兼职，并非均配备专门人员。因此CD说法不正确。"
+      },
+      {
+        uid: "m_11",
+        num: 11,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "资质单位保密工作领导小组成员包括（ ）。",
+        options: [{"key":"A","text":"法定代表人或主要负责人"},{"key":"B","text":"保密总监或分管保密工作负责人"},{"key":"C","text":"有关部门主要负责人"},{"key":"D","text":"专职保密管理员"}],
+        answer: ["A","B","C"],
+        hint: "领导小组由领导班子及相关核心业务部门主要负责人组成，基层保密员不属于领导小组成员。",
+        explanation: "资质单位保密工作领导机构由法定代表人/主要负责人（组长）、保密总监/分管领导（副组长）及行政、人事、技术、业务等关键部门负责人组成（选ABC）。"
+      },
+      {
+        uid: "m_12",
+        num: 12,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "下列项目属于国家秘密载体印制资质申请条件的是（ ）。",
+        options: [{"key":"A","text":"缴纳社保金满1年人数"},{"key":"B","text":"上年度净资产值"},{"key":"C","text":"固定生产经营场所"},{"key":"D","text":"注册资本"}],
+        answer: ["A","B","C"],
+        hint: "申请条件考量社保缴纳年限人数、净资产和固定场所，非单纯实缴注册资本（选ABC）。",
+        explanation: "国家秘密载体印制资质申请条件包括：缴纳社保金满1年人数达标、上年度净资产值符合要求、具有符合保密要求的自有或长期租赁固定经营场所（选ABC）。"
+      },
+      {
+        uid: "m_13",
+        num: 13,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "下列属于保密管理经费用途的是（ ）。",
+        options: [{"key":"A","text":"保密宣传教育培训"},{"key":"B","text":"发放保密补贴"},{"key":"C","text":"保密设施设备的维护"},{"key":"D","text":"保密检查"}],
+        answer: ["A","D"],
+        hint: "保密补贴属于保密补贴经费；设施维护属于保密专项经费；宣传教育和保密检查属于保密管理经费（选AD）。",
+        explanation: "保密工作经费分为三类：保密补贴、保密管理经费和保密专项经费。保密宣传教育培训和日常保密检查支出属于保密管理经费用途（选AD）。"
+      },
+      {
+        uid: "m_14",
+        num: 14,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "下列哪些属于涉密人员签订劳动合同或者补充协议的内容？（ ）",
+        options: [{"key":"A","text":"因认真履行保密职责给予奖励的规定"},{"key":"B","text":"因违反保密规定而被调离涉密岗位或者给予辞退等处罚的规定"},{"key":"C","text":"应当遵守的保密管理要求"},{"key":"D","text":"脱密期管理相关要求"}],
+        answer: ["A","B","C","D"],
+        hint: "奖惩、职责与脱密期全生命周期条款均须体现在涉密劳动合同或保密协议中（全选ABCD）。",
+        explanation: "全选ABCD。涉密人员劳动合同或补充协议中必须写明奖励机制、违规惩处与辞退、履职保密要求以及离职脱密期限制等各项法定义务。"
+      },
+      {
+        uid: "m_15",
+        num: 15,
+        type: "multi_choice",
+        typeName: "多项选择题",
+        question: "涉密人员脱密期有关信息应当以函件形式告知（ ）。",
+        options: [{"key":"A","text":"保密行政管理部门"},{"key":"B","text":"国家安全机关"},{"key":"C","text":"公安机关"},{"key":"D","text":"人力资源和社会保障部门"}],
+        answer: ["A","B","C","D"],
+        hint: "联合管控联动机制：保密局、国安局、公安局（出入境）、人社局四部门均须函告备案（全选ABCD）。",
+        explanation: "全选ABCD。单位应当将涉密人员脱密期及从业限制有关信息，以书面函件形式同时通报保密行政管理部门、国家安全机关、公安机关和人社部门，形成监管合力。"
+      },
+
+      /* ---------------- 五、二、专项题（档案数字化类共10题） ---------------- */
+      {
+        uid: "s_1",
+        num: 1,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "档案数字化加工过程应当严格控制档案实体及数字化加工成果的{1}，不得擅自{2}、{3}。",
+        answers: ["知悉范围","复制","留存"],
+        alts: [["知悉范围"],["复制","复印","抄录"],["留存","截留","保存"]],
+        source: "档案数字化过程管控"
+      },
+      {
+        uid: "s_2",
+        num: 2,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "涉密档案数字化加工任务完成后，应当将{1}及全部数字化加工成果、存储过的存储介质等信息载体移交给{2}，不得擅自留存。全部加工设备中存储的加工信息，应当在委托方的监督下按照国家保密标准进行{3}。",
+        answers: ["档案实体","委托方","信息消除"],
+        alts: [["档案实体","原件实体","实体档案"],["委托方","委托单位"],["信息消除","数据消除","清除","销毁"]],
+        source: "档案加工移交与信息消除"
+      },
+      {
+        uid: "s_3",
+        num: 3,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "资质单位在自有场所加工的档案数字化成果，应当以光盘、硬盘等实物形式交付委托方，不得利用{1}传递交付。",
+        answers: ["互联网及其他公共信息网络"],
+        alts: [["互联网及其他公共信息网络","互联网及其他公共网络","互联网及公共信息网络","互联网","公网"]],
+        source: "成果交付传递渠道要求"
+      },
+      {
+        uid: "s_4",
+        num: 4,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "涉密信息系统和涉密信息设备的信息导入导出应当履行审批程序，{1}、有效控制，并采取相应{2}。",
+        answers: ["相对集中","审计措施"],
+        alts: [["相对集中","集中管理","集中"],["审计措施","安全审计措施","审计"]],
+        source: "数据导入导出管理"
+      },
+      {
+        uid: "s_5",
+        num: 5,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "涉密信息设备重装操作系统应当履行{1}。报废涉密信息设备，应经过{2}，拆除涉密信息{3}。报废涉密存储介质和涉密信息存储部件，应当按照涉密载体销毁有关规定执行。",
+        answers: ["审批程序","安全技术处理","存储部件"],
+        alts: [["审批程序","审批手续","审批"],["安全技术处理","技术处理"],["存储部件","信息存储部件","硬盘"]],
+        source: "系统重装与设备报废"
+      },
+      {
+        uid: "s_6",
+        num: 6,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "涉密或需要严格控制知悉范围的档案数字化加工，原则上应当在{1}提供的场所进行；其他非涉密档案数字化加工，可在{2}场所进行。",
+        answers: ["委托方","自有"],
+        alts: [["委托方","委托单位"],["自有","自有加工","本单位"]],
+        source: "数字化加工场所选择规定"
+      },
+      {
+        uid: "s_7",
+        num: 7,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "涉密档案数字化加工场所应当按照{1}管理，配备门禁，视频监控应当安排专人{2}值守。对每次出入涉密档案数字化加工场所的人员应当进行{3}，未经审批，禁止{4}任何信息设备或者其他物品。",
+        answers: ["保密要害部位","不间断","安全保密检查","带入带出"],
+        alts: [["保密要害部位","要害部位"],["不间断","24小时","全程"],["安全保密检查","保密检查","安全检查"],["带入带出","带入或带出","私自带入带出"]],
+        source: "加工场所安防等级与进出管控"
+      },
+      {
+        uid: "s_8",
+        num: 8,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "资质单位应当{1}负责档案数字化加工场所的安全保密工作，严格遵守{2}的安全保密要求。",
+        answers: ["指定专人","委托方"],
+        alts: [["指定专人","设专人","派专人"],["委托方","委托单位"]],
+        source: "专人负责制"
+      },
+      {
+        uid: "s_9",
+        num: 9,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "涉密档案数字化加工场所外应当{1}，供存放{2}。",
+        answers: ["配备专柜","私人物品"],
+        alts: [["配备专柜","设置专柜","配设专柜","配备储物柜"],["私人物品","个人物品"]],
+        source: "加工场所外部储物配置"
+      },
+      {
+        uid: "s_10",
+        num: 10,
+        type: "special",
+        isSpecial: true,
+        typeName: "专项填空题",
+        sectionName: "二、专项题（档案数字化类）",
+        template: "资质单位应当积极建立与委托方的{1}机制，接受委托方对{2}的监督和管理。",
+        answers: ["共同监管","保密工作"],
+        alts: [["共同监管","协同监管","联合监管"],["保密工作","安全保密工作"]],
+        source: "共同监管长效机制"
+      },
+
+      /* ---------------- 六、三、问答题（涉密档案数字化加工员共8题） ---------------- */
+      {
+        uid: "q_1",
+        num: 1,
+        type: "essay",
+        typeName: "问答题",
+        sectionName: "三、问答题（涉密档案数字化加工员）",
+        title: "请详细叙述《中华人民共和国保守国家秘密法》第四十八条列举的十二种违法行为。",
+        points: ["(1) 非法获取、持有国家秘密载体的；","(2) 买卖、转送或者私自销毁国家秘密载体的；","(3) 通过普通邮政、快递等无保密措施的渠道传递国家秘密载体的；","(4) 邮寄、托运国家秘密载体出境，或者未经有关主管部门批准，携带、传递国家秘密载体出境的；","(5) 非法复制、记录、存储国家秘密的；","(6) 在私人交往和通信中涉及国家秘密的；","(7) 在互联网及其他公共信息网络或者未采取保密措施的有线和无线通信中传递国家秘密的；","(8) 将涉密计算机、涉密存储设备接入互联网及其他公共信息网络的；","(9) 在未采取防护措施的情况下，在涉密信息系统与互联网及其他公共信息网络之间进行信息交换的；","(10) 使用非涉密计算机、非涉密存储设备存储、处理国家秘密信息的；","(11) 擅自卸载、修改涉密信息系统的安全技术程序、管理程序的；","(12) 将未经安全技术处理的退出使用的涉密计算机、涉密存储设备赠送、出售、丢弃或者改作其他用途的。"],
+        hint: "保密法48条12种违法行为记忆口诀：1-4载体流转（获取/买卖/邮递/出境），5-7言行信道（复制/私信/公网传密），8-12设备网络（非涉密混用/交叉摆渡/违规外联/擅卸程序/违规处置）。",
+        coreKeywords: "载体非法获取买卖、私自传递邮递出境、非法复制私信涉密、网络通信传密、涉密计算机连外网、未防护信息交换、非涉密设备存密、擅卸技术程序、退出设备违规处置"
+      },
+      {
+        uid: "q_2",
+        num: 2,
+        type: "essay",
+        typeName: "问答题",
+        sectionName: "三、问答题（涉密档案数字化加工员）",
+        title: "请列举资质单位与涉密人员签订的劳动合同或者补充协议应包含的内容。",
+        points: ["(1) 权利与义务；","(2) 应当遵守的保密管理要求；","(3) 因履行保密职责导致利益受到损害给予补偿的规定；","(4) 因违反保密规定而被调离涉密岗位或给予辞退等处罚的规定；","(5) 因认真履行保密职责给予奖励的规定；","(6) 脱密期相关保密要求。"],
+        hint: "协议六大必备条款：权责义务、履职要求、履职损害补偿、违规调岗辞退处罚、履职优异奖励、脱密期管控要求。",
+        coreKeywords: "权利义务、保密要求、利益补偿规定、违规辞退处罚、履责奖励规定、脱密期要求"
+      },
+      {
+        uid: "q_3",
+        num: 3,
+        type: "essay",
+        typeName: "问答题",
+        sectionName: "三、问答题（涉密档案数字化加工员）",
+        title: "资质单位发生哪些事项变更，应当在变更前向作出审批的保密行政管理部门书面报告？",
+        points: ["(1) 注册资本或者股权结构；","(2) 控股股东或者实际控制人；","(3) 单位性质或者隶属关系；","(4) 用于涉密印制业务的场所。"],
+        hint: "“变更前事前报告”涉及企业本质属性和涉密物理实体：资本股权、实控人股东、企业性质、涉密场所。（涉及资质前置条件的4大重大事项）。",
+        coreKeywords: "注册资本/股权结构、控股股东/实控人、单位性质/隶属关系、涉密业务场所"
+      },
+      {
+        uid: "q_4",
+        num: 4,
+        type: "essay",
+        typeName: "问答题",
+        sectionName: "三、问答题（涉密档案数字化加工员）",
+        title: "资质单位发生哪些事项变更，应当在变更后十个工作日内向作出审批的保密行政管理部门书面报告？",
+        points: ["(1) 单位名称；","(2) 注册地址或者经营地址；","(3) 经营范围；","(4) 法定代表人、董（监）事会人员或者高级管理人员。"],
+        hint: "“变更后10个工作日事后报告”属于工商登记日常备案事项：企业名称、注册经营地址、经营范围、法人/董监高管理人员。",
+        coreKeywords: "单位名称、注册/经营地址、经营范围、法定代表人/董监高人员"
+      },
+      {
+        uid: "q_5",
+        num: 5,
+        type: "essay",
+        typeName: "问答题",
+        sectionName: "三、问答题（涉密档案数字化加工员）",
+        title: "请列举资质单位发生哪些情形，保密行政管理部门应当吊销其资质？",
+        points: ["(1) 涂改、出卖、出租、出借《资质证书》，或者以其他方式伪造、非法转让《资质证书》的；","(2) 将涉密印制业务分包或者转包给无相应涉密资质单位的；","(3) 发现国家秘密已经泄露或者可能泄露，未按法定时限报告的；","(4) 拒绝接受保密检查的；","(5) 资质暂停期间，承接新的涉密印制业务的；","(6) 资质暂停期满，仍不符合保密管理规定的；","(7) 发生泄密案件的；","(8) 其他违反保密法律法规的行为。"],
+        hint: "吊销资质八大严惩情形：买卖租借证书、违规分包转包、瞒报迟报泄密、抗拒保密检查、暂停期违规接单、停期届满仍不合格、发生泄密大案、其他严重违法。",
+        coreKeywords: "转让租借证书、违规分包转包、未按限期报告泄密、拒绝检查、暂停期承接业务、期满仍不合规、发生泄密案件"
+      },
+      {
+        uid: "q_6",
+        num: 6,
+        type: "essay",
+        typeName: "问答题",
+        sectionName: "三、问答题（涉密档案数字化加工员）",
+        title: "请简述本人职务及履行的保密责任是什么？",
+        points: ["(1) 贯彻执行党和国家有关保密工作的方针政策和法律条款；","(2) 依据保密标准结合本职岗位的保密要求开展保密工作；","(3) 履行保密义务和责任，自觉遵守涉密人员管理规定；","(4) 定期按要求进行保密自查；","(5) 因私出国（境）应报并履行审批手续；","(6) 离岗、离职应履行保密承诺及执行脱密期管理规定。"],
+        hint: "岗位保密责任六条准则：方针法条落实、结合标准履职、自觉遵守规定、定期自查自纠、因私出境审批、离岗承诺与脱密。",
+        coreKeywords: "执行方针法律、结合岗位要求、自觉遵守规定、定期保密自查、出国审批、离岗履约与脱密期"
+      },
+      {
+        uid: "q_7",
+        num: 7,
+        type: "essay",
+        typeName: "问答题",
+        sectionName: "三、问答题（涉密档案数字化加工员）",
+        title: "请简述本人所在涉密岗位的基本工作流程是什么？",
+        points: ["(1) 接到项目任务，接受保密工作培训及签订项目保密协议；","(2) 涉密项目全过程的保密管理，接受委托方全方位的保密监督检查；","(3) 档案情况调研；","(4) 明确项目工作范围；","(5) 制定项目实施工作方案；","(6) 档案出库、档案分件、扫描、图像处理、数据质检；","(7) 档案还原入库；","(8) 项目验收后，对涉密项目资料进行整理归档，并全部移交给委托方。"],
+        hint: "数字化加工八步流程：培训签协议 → 全过程监管受检 → 档案调研 → 明确范围 → 制定实施方案 → 出库分件扫描处理质检 → 还原入库 → 验收归档全移交。",
+        coreKeywords: "培训签协议、全过程监管受检、档案调研、明确范围、制定方案、出库加工处理质检、还原入库、验收移交委托方"
+      },
+      {
+        uid: "q_8",
+        num: 8,
+        type: "essay",
+        typeName: "问答题",
+        sectionName: "三、问答题（涉密档案数字化加工员）",
+        title: "请简述本人所在涉密岗位存在哪些保密管理风险点？针对这些风险点主要采取哪些防控措施？",
+        points: ["【一、主要保密风险点】","1. 人员风险：人员政审不严、保密意识薄弱；违规携带手机、摄录设备入场；离岗未清权清载体，管控松散，易发生口头泄密、偷拍泄密。","2. 场所风险：加工区域未物理隔离、门禁监控不完善；无关人员可进入，现场管控存在盲区。","3. 设备介质风险：涉密设备、介质公私混用；无线功能未关闭；临时缓存、中间副本未清理；报废设备载体残留涉密信息。","4. 流程风险：档案出入库、交接台账不全，易造成原件流失；加工环节越权操作，电子档案违规传输、外泄。","5. 网络安全风险：涉密设备违规联网，易遭受病毒木马攻击，导致涉密数据泄露。","【二、主要防控措施】","1. 严控人员管理：严格人员政审，全员签订保密承诺书；常态化开展保密教育；实行加工区准入制度，严禁携带手机、相机等设备入场；落实离岗清权、清载体及脱密期管理。","2. 规范场所管理：设置独立保密加工区域，做好物理隔离；配齐门禁、监控设备并长期留存录像，无关人员禁止入内。","3. 严管设备介质：落实涉密设备、介质专机专用、专盘专用，禁用无线功能；及时清理临时涉密文件，报废载体严格执行消磁、物理销毁制度。","4. 规范加工流程：完善档案出入库、交接登记台账，责任到人；实行最小权限分级管控，留存操作审计日志；涉密电子档案加密存储、传输，严禁公网传递涉密信息。","5. 筑牢网络防护：涉密设备与互联网物理隔离，安装杀毒、安全审计软件，防范网络攻击。"],
+        hint: "五大维度系统防范：人员、场所、设备介质、流程、网络安全（风险剖析 + 针对性五位一体防控措施）。",
+        coreKeywords: "人员管理政审清退、场所物理隔离门禁监控、设备介质专机专盘禁无线、流程台账审计加密、网络物理隔离防攻击"
+      }
+    ];
+
+    /* ============================================================
+       程序运行时状态
+       ============================================================ */
+    const STORAGE_KEY = 'confidential_exam_data_v9';
+    let appMode = 'single'; // 'single' | 'list' | 'memory'
+    let currentScope = 'all'; // 'all' | 'blank' | 'judge'
+    let currentQIndex = 0;
+    let questions = JSON.parse(JSON.stringify(ALL_QUESTIONS));
+    let navFilter = 'all'; // 'all' | 'wrong' | 'starred' | 'unanswered'
+    let userRecords = {};  // { [uid]: { inputs: string[], judgeVal: boolean|null, isCorrect: boolean|null, isHinted: boolean, hintLevel: number, isStarred: boolean } }
+
+    function initApp() {
+      loadStorage();
+      applyScopeFilter(currentScope);
+      renderDashboard();
+      renderSingleQuestion();
+      renderListMode();
+      renderMemoryMode();
+      renderGridNav();
+      setupKeyboard();
+    }
+
+    function loadStorage() {
+      try {
+        const data = localStorage.getItem(STORAGE_KEY);
+        if (data) {
+          userRecords = JSON.parse(data);
+        }
+        // 自动向前兼容：若当前未记录专项训练或问答题数据，尝试从历史版本读取并迁移，防止数据丢失
+        ['confidential_exam_data_v8', 'confidential_exam_data_v7', 'confidential_exam_data_v6'].forEach(oldKey => {
+          try {
+            const oldData = localStorage.getItem(oldKey);
+            if (oldData) {
+              const oldParsed = JSON.parse(oldData);
+              ALL_QUESTIONS.forEach(q => {
+                if (q.type === 'special' || q.type === 'essay') {
+                  const oldRec = oldParsed[q.uid];
+                  const curRec = userRecords[q.uid];
+                  const hasOld = oldRec && ((oldRec.inputs && oldRec.inputs.some(v => v)) || oldRec.essayText || oldRec.isMastered || oldRec.isStarred);
+                  const hasCur = curRec && ((curRec.inputs && curRec.inputs.some(v => v)) || curRec.essayText || curRec.isMastered || curRec.isStarred);
+                  if (hasOld && !hasCur) {
+                    userRecords[q.uid] = oldRec;
+                  }
+                }
+              });
+            }
+          } catch (e) {}
+        });
+      } catch (e) {
+        console.error("加载进度异常", e);
+      }
+      ALL_QUESTIONS.forEach(q => {
+        if (!userRecords[q.uid]) {
+          userRecords[q.uid] = {
+            inputs: (q.type === 'blank' || q.type === 'special') ? new Array(q.answers.length).fill('') : [],
+            judgeVal: null,
+            choiceVal: null,
+            multiVals: [],
+            essayText: '',
+            isMastered: false,
+            isCorrect: null,
+            isHinted: false,
+            hintLevel: 0,
+            isStarred: false
+          };
+        } else if (q.type === 'blank' || q.type === 'special') {
+          if (!Array.isArray(userRecords[q.uid].inputs)) {
+            userRecords[q.uid].inputs = new Array(q.answers.length).fill('');
+          } else {
+            while (userRecords[q.uid].inputs.length < q.answers.length) {
+              userRecords[q.uid].inputs.push('');
+            }
+          }
+        }
+      });
+    }
+
+    function saveStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(userRecords));
+      } catch (e) {}
+      renderDashboard();
+      renderGridNav();
+    }
+
+    /* 题型范围切换 */
+    function setQuestionTypeScope(scope, btnEl) {
+      currentScope = scope;
+      document.querySelectorAll('.type-pill').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      applyScopeFilter(scope);
+      currentQIndex = 0;
+      renderSingleQuestion();
+      renderListMode();
+      renderMemoryMode();
+      renderGridNav();
+      renderDashboard();
+      showToast(`已切换至：${scope === 'all' ? '全部题目 (共160题)' : (scope === 'blank' ? '填空题 (50题)' : (scope === 'judge' ? '判断题 (50题)' : (scope === 'choice' ? '单选题 (35题)' : (scope === 'multi_choice' ? '多选题 (15题)' : '档案数字化专项题 (10题)'))))}`);
+    }
+
+    function applyScopeFilter(scope) {
+      if (scope === 'all') {
+        questions = JSON.parse(JSON.stringify(ALL_QUESTIONS));
+      } else {
+        questions = ALL_QUESTIONS.filter(q => q.type === scope);
+      }
+    }
+
+    /* 模式切换 */
+    function switchAppMode(mode) {
+      appMode = mode;
+      document.querySelectorAll('.mode-pill').forEach(btn => btn.classList.remove('active'));
+      if (mode === 'single') document.getElementById('btnModeSingle').classList.add('active');
+      if (mode === 'list') document.getElementById('btnModeList').classList.add('active');
+      if (mode === 'memory') document.getElementById('btnModeMemory').classList.add('active');
+
+      document.getElementById('singleModeSection').style.display = (mode === 'single') ? 'block' : 'none';
+      document.getElementById('listModeSection').style.display = (mode === 'list') ? 'block' : 'none';
+      document.getElementById('memoryModeSection').style.display = (mode === 'memory') ? 'block' : 'none';
+
+      if (mode === 'single') renderSingleQuestion();
+      if (mode === 'list') renderListMode();
+      if (mode === 'memory') renderMemoryMode();
+    }
+
+    /* ============================================================
+       单题模式渲染与交互
+       ============================================================ */
+    function renderSingleQuestion() {
+      if (!questions.length) return;
+      const q = questions[currentQIndex];
+      const record = userRecords[q.uid];
+
+      document.getElementById('qNumberTag').innerText = `${q.typeName} 第 ${q.num} 题`;
+      document.getElementById('qTypeTag').innerText = q.typeName;
+      document.getElementById('qExtraTag').innerText = (q.type === 'blank' || q.type === 'special') ? `${q.answers.length} 个空` : (q.type === 'judge' ? '对错判断' : (q.type === 'choice' ? '单选' : (q.type === 'multi_choice' ? '多选' : '问答论述')));
+
+      // 收藏状态
+      const favBtn = document.getElementById('starCurrentBtn');
+      if (record.isStarred) favBtn.classList.add('active');
+      else favBtn.classList.remove('active');
+
+      const container = document.getElementById('qBodyContainer');
+      const judgeControls = document.getElementById('judgeControlsArea');
+      const choiceControls = document.getElementById('choiceControlsArea');
+
+      if (q.type === 'blank' || q.type === 'special') {
+        judgeControls.style.display = 'none';
+        if (choiceControls) choiceControls.style.display = 'none';
+        container.innerHTML = generateQuestionHtml(q, record, 'single');
+      } else if (q.type === 'judge') {
+        judgeControls.style.display = 'flex';
+        if (choiceControls) choiceControls.style.display = 'none';
+        container.innerHTML = `<span>${q.num}. ${escapeHtml(q.statement)}</span>`;
+        updateJudgeButtons(q, record);
+      } else if (q.type === 'choice') {
+        judgeControls.style.display = 'none';
+        if (choiceControls) choiceControls.style.display = 'flex';
+        container.innerHTML = `<span style="font-weight: 600;">${q.num}. ${escapeHtml(q.question)}</span>`;
+        renderChoiceOptions(q, record);
+      } else if (q.type === 'multi_choice') {
+        judgeControls.style.display = 'none';
+        if (choiceControls) choiceControls.style.display = 'flex';
+        container.innerHTML = `<span style="font-weight: 600;">${q.num}. [多选题] ${escapeHtml(q.question)}</span>`;
+        renderMultiChoiceOptions(q, record);
+      } else if (q.type === 'essay') {
+        judgeControls.style.display = 'none';
+        if (choiceControls) choiceControls.style.display = 'none';
+        container.innerHTML = `
+          <div style="font-size: 1.18rem; font-weight: 700; line-height: 1.8; margin-bottom: 12px; color: var(--text-main);">
+            ${q.num}. ${escapeHtml(q.title)}
+          </div>
+          <div style="font-size: 0.84rem; color: var(--text-muted);">
+            💡 本题考查涉密档案数字化加工员核心履职要求与法规硬性规定，可尝试在下方默写作答，点击【查看答案】进行对照背诵。
+          </div>
+        `;
+        renderEssayControls(q, record);
+      }
+
+      // 提示气泡处理
+      updateHintBubble(q, record);
+
+      // 解析卡处理
+      updateSolutionBox(q, record);
+
+      // 下一题按钮
+      const nextBtn = document.getElementById('btnSubmitOrNext');
+      if (record.isCorrect === true) {
+        nextBtn.innerText = currentQIndex === questions.length - 1 ? "完成答题 🎉" : "下一题 ▶";
+      } else {
+        nextBtn.innerText = (q.type === 'blank' || q.type === 'special') ? "核对答案 ✔" : (q.type === 'essay' ? (record.isMastered ? "下一题 ▶" : "标记已掌握并下一题 ▶") : "下一题 ▶");
+      }
+
+      const hintTxt = ["轻度提示", "中度提示", "全部揭晓"][record.hintLevel || 0] || "轻度提示";
+      document.getElementById('currentHintLevelText').innerText = hintTxt;
+
+      if (q.type === 'blank' || q.type === 'special') {
+        setTimeout(() => {
+          const firstEmpty = container.querySelector('.blank-input:not([value=""])');
+          const firstInput = container.querySelector('.blank-input');
+          if (firstEmpty && !firstEmpty.value) firstEmpty.focus();
+          else if (firstInput) firstInput.focus();
+        }, 50);
+      }
+
+      renderGridNav();
+    }
+
+    
+    function renderChoiceOptions(q, record) {
+      const area = document.getElementById('choiceControlsArea');
+      if (!area) return;
+      area.innerHTML = '';
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        let extraClass = '';
+        if (record.choiceVal === opt.key) {
+          extraClass = record.isCorrect ? ' selected-correct' : ' selected-wrong';
+        }
+        btn.className = `btn-choice-opt${extraClass}`;
+
+        btn.innerHTML = `
+          <div class="opt-key-badge">${opt.key}</div>
+          <div style="flex: 1;">${escapeHtml(opt.text)}</div>
+        `;
+
+        btn.onclick = () => handleChoiceSelect(opt.key);
+        area.appendChild(btn);
+      });
+    }
+
+    function handleChoiceSelect(key) {
+      const q = questions[currentQIndex];
+      const record = userRecords[q.uid];
+      record.choiceVal = key;
+      record.isCorrect = (key === q.answer);
+      saveStorage();
+      renderSingleQuestion();
+
+      if (record.isCorrect) {
+        showToast(`✨ 选择正确！答案为 [${key}]`);
+      } else {
+        showToast(`❌ 选择错误，正确答案是 [${q.answer}]`);
+      }
+    }
+
+    
+    function renderMultiChoiceOptions(q, record) {
+      const area = document.getElementById('choiceControlsArea');
+      if (!area) return;
+      area.innerHTML = '';
+
+      if (!record.multiVals) record.multiVals = [];
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        const isChecked = record.multiVals.includes(opt.key);
+        let extraClass = isChecked ? ' checked' : '';
+
+        if (record.isCorrect === true) {
+          if (q.answer.includes(opt.key)) extraClass += ' selected-correct';
+        } else if (record.isCorrect === false) {
+          if (isChecked && !q.answer.includes(opt.key)) extraClass += ' selected-wrong';
+          else if (q.answer.includes(opt.key)) extraClass += ' selected-correct';
+        }
+
+        btn.className = `btn-multi-opt${extraClass}`;
+        btn.innerHTML = `
+          <div class="opt-key-badge">${opt.key}</div>
+          <div style="flex: 1;">${escapeHtml(opt.text)}</div>
+          <div style="font-size: 1.1rem; color: ${isChecked ? 'var(--primary)' : 'var(--text-muted)'};">${isChecked ? '☑' : '☐'}</div>
+        `;
+
+        btn.onclick = () => handleMultiChoiceToggle(opt.key);
+        area.appendChild(btn);
+      });
+
+      // 提交确认按钮
+      const row = document.createElement('div');
+      row.className = 'multi-submit-btn-row';
+      row.innerHTML = `
+        <button class="btn btn-primary" onclick="submitMultiChoiceAnswer()" style="padding: 10px 24px;">
+          ✔ 确认提交所选选项 (${record.multiVals.length} 项)
+        </button>
+      `;
+      area.appendChild(row);
+    }
+
+    function handleMultiChoiceToggle(key) {
+      const q = questions[currentQIndex];
+      const record = userRecords[q.uid];
+      if (!record.multiVals) record.multiVals = [];
+
+      const idx = record.multiVals.indexOf(key);
+      if (idx !== -1) {
+        record.multiVals.splice(idx, 1);
+      } else {
+        record.multiVals.push(key);
+        record.multiVals.sort();
+      }
+      record.isCorrect = null;
+      saveStorage();
+      renderSingleQuestion();
+    }
+
+    function submitMultiChoiceAnswer() {
+      const q = questions[currentQIndex];
+      const record = userRecords[q.uid];
+      if (!record.multiVals || record.multiVals.length === 0) {
+        showToast("⚠️ 请至少选择一个选项");
+        return;
+      }
+      const sortedUser = [...record.multiVals].sort().join(',');
+      const sortedAns = [...q.answer].sort().join(',');
+      record.isCorrect = (sortedUser === sortedAns);
+      saveStorage();
+      renderSingleQuestion();
+
+      if (record.isCorrect) {
+        showToast(`✨ 答对全部多选项！标准答案为 [${sortedAns}]`);
+      } else {
+        showToast(`❌ 存在漏选或错选，正确答案是 [${sortedAns}]`);
+      }
+    }
+
+    
+    function renderEssayControls(q, record) {
+      const area = document.getElementById('essayControlsArea');
+      if (!area) return;
+      area.style.display = 'flex';
+      area.innerHTML = '';
+
+      const textarea = document.createElement('textarea');
+      textarea.className = 'essay-textarea';
+      textarea.placeholder = '在此输入你的回答、核心采分点或默写草稿...（输入内容将自动保存）';
+      textarea.value = record.essayText || '';
+      textarea.oninput = (e) => {
+        record.essayText = e.target.value;
+        saveStorage();
+      };
+      area.appendChild(textarea);
+
+      const row = document.createElement('div');
+      row.className = 'essay-action-row';
+
+      const masteredBtn = document.createElement('button');
+      masteredBtn.className = `btn ${record.isMastered ? 'btn-primary' : 'btn-outline'}`;
+      masteredBtn.innerText = record.isMastered ? '✔ 本题已掌握' : '标为已掌握';
+      masteredBtn.onclick = () => {
+        record.isMastered = !record.isMastered;
+        record.isCorrect = record.isMastered ? true : null;
+        saveStorage();
+        renderSingleQuestion();
+        showToast(record.isMastered ? '🎉 已标记掌握本道大题！' : '已取消掌握标记');
+      };
+      row.appendChild(masteredBtn);
+
+      const toggleSolBtn = document.createElement('button');
+      toggleSolBtn.className = 'btn btn-outline';
+      toggleSolBtn.innerText = '👁 展开/收起标准参考要点';
+      toggleSolBtn.onclick = () => toggleSolutionBox();
+      row.appendChild(toggleSolBtn);
+
+      area.appendChild(row);
+    }
+
+    function updateJudgeButtons(q, record) {
+      const trueBtn = document.getElementById('btnJudgeTrue');
+      const falseBtn = document.getElementById('btnJudgeFalse');
+
+      trueBtn.className = 'btn-judge true-btn';
+      falseBtn.className = 'btn-judge false-btn';
+
+      if (record.judgeVal === true) {
+        trueBtn.classList.add(record.isCorrect ? 'selected-correct' : 'selected-wrong');
+      } else if (record.judgeVal === false) {
+        falseBtn.classList.add(record.isCorrect ? 'selected-correct' : 'selected-wrong');
+      }
+    }
+
+    function handleJudgeSelect(val) {
+      const q = questions[currentQIndex];
+      const record = userRecords[q.uid];
+      record.judgeVal = val;
+      record.isCorrect = (val === q.answer);
+      saveStorage();
+      renderSingleQuestion();
+
+      if (record.isCorrect) {
+        showToast("✨ 判断正确！");
+      } else {
+        showToast("❌ 判断错误，请阅读标准考点解析");
+      }
+    }
+
+    /* 填空题 HTML */
+    function generateQuestionHtml(q, record, context) {
+      let html = q.template;
+      for (let i = 0; i < q.answers.length; i++) {
+        const blankNum = i + 1;
+        const val = record.inputs[i] || '';
+        const standardAns = q.answers[i];
+        
+        let statusClass = '';
+        if (record.isCorrect === true) statusClass = 'correct';
+        else if (record.isCorrect === false) {
+          statusClass = checkSingleBlank(val, q, i) ? 'correct' : 'wrong';
+        } else if (record.hintLevel > 0) {
+          statusClass = 'hinted';
+        }
+
+        const inputWidth = Math.max(90, (standardAns.length * 20) + 36);
+
+        const blankSnippet = `
+          <span class="blank-wrap">
+            <input type="text" 
+              class="blank-input ${statusClass}" 
+              id="blank_${context}_${q.uid}_${i}" 
+              value="${escapeHtml(val)}"
+              style="width: ${inputWidth}px;"
+              placeholder="${getPlaceholderText(record.hintLevel, standardAns)}"
+              oninput="handleInputChange('${q.uid}', ${i}, this.value, '${context}')"
+              onkeydown="handleBlankKeydown(event, '${q.uid}', ${i})"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button class="blank-hint-btn" onclick="triggerSingleBlankHint('${q.uid}', ${i})" title="单独提示此空">💡</button>
+          </span>
+        `;
+        html = html.replace(`{${blankNum}}`, blankSnippet);
+      }
+      return `${q.num}. ` + html;
+    }
+
+    function getPlaceholderText(hintLevel, standardAns) {
+      if (!hintLevel || hintLevel === 0) return `(${standardAns.length}字)`;
+      if (hintLevel === 1) return `[${standardAns.length}字]`;
+      if (hintLevel >= 2) return `${standardAns.slice(0, 1)}...`;
+      return '';
+    }
+
+    function handleInputChange(uid, blankIdx, val, context) {
+      userRecords[uid].inputs[blankIdx] = val.trim();
+      if (userRecords[uid].isCorrect === false) {
+        userRecords[uid].isCorrect = null;
+      }
+      saveStorage();
+    }
+
+    function handleBlankKeydown(e, uid, blankIdx) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const q = questions.find(item => item.uid === uid);
+        if (blankIdx < q.answers.length - 1) {
+          const nextInput = document.getElementById(`blank_single_${uid}_${blankIdx + 1}`);
+          if (nextInput) nextInput.focus();
+        } else {
+          handleCardSubmitOrNext();
+        }
+      }
+    }
+
+    function checkSingleBlank(inputVal, q, blankIdx) {
+      if (!inputVal) return false;
+      const cleanInput = inputVal.replace(/\s+/g, '').toLowerCase();
+      const standardAns = q.answers[blankIdx].replace(/\s+/g, '').toLowerCase();
+      if (cleanInput === standardAns) return true;
+
+      if (q.alts && q.alts[blankIdx]) {
+        return q.alts[blankIdx].some(alt => alt.replace(/\s+/g, '').toLowerCase() === cleanInput);
+      }
+      return false;
+    }
+
+    function checkQuestion(uid) {
+      const q = ALL_QUESTIONS.find(item => item.uid === uid);
+      const record = userRecords[uid];
+
+      if (q.type === 'judge') {
+        if (record.judgeVal === null) return false;
+        record.isCorrect = (record.judgeVal === q.answer);
+        return record.isCorrect;
+      }
+      if (q.type === 'choice') {
+        if (!record.choiceVal) return false;
+        record.isCorrect = (record.choiceVal === q.answer);
+        return record.isCorrect;
+      }
+      if (q.type === 'multi_choice') {
+        if (!record.multiVals || record.multiVals.length === 0) return false;
+        const sortedUser = [...record.multiVals].sort().join(',');
+        const sortedAns = [...q.answer].sort().join(',');
+        record.isCorrect = (sortedUser === sortedAns);
+        return record.isCorrect;
+      }
+      if (q.type === 'essay') {
+        record.isCorrect = record.isMastered ? true : null;
+        return record.isMastered;
+      }
+
+      // 填空题及专项填空题
+      let allCorrect = true;
+      for (let i = 0; i < q.answers.length; i++) {
+        const isOk = checkSingleBlank(record.inputs[i], q, i);
+        if (!isOk) allCorrect = false;
+      }
+      record.isCorrect = allCorrect;
+      return allCorrect;
+    }
+
+    function handleCardSubmitOrNext() {
+      const q = questions[currentQIndex];
+      const record = userRecords[q.uid];
+
+      if (q.type === 'judge') {
+        if (record.judgeVal === null) {
+          showToast("请先选择【正确】或【错误】");
+          return;
+        }
+        if (currentQIndex < questions.length - 1) {
+          navigateQuestion(1);
+        } else {
+          showToast("🎉 已答完全部试题！");
+          showScoreModal();
+        }
+        return;
+      }
+      if (q.type === 'choice') {
+        if (!record.choiceVal) {
+          showToast("请先点击选择一个答案选项");
+          return;
+        }
+        if (currentQIndex < questions.length - 1) {
+          navigateQuestion(1);
+        } else {
+          showToast("🎉 已答完全部试题！");
+          showScoreModal();
+        }
+        return;
+      }
+      if (q.type === 'multi_choice') {
+        if (record.isCorrect === null) {
+          submitMultiChoiceAnswer();
+          return;
+        }
+        if (currentQIndex < questions.length - 1) {
+          navigateQuestion(1);
+        } else {
+          showToast("🎉 已答完全部试题！");
+          showScoreModal();
+        }
+        return;
+      }
+
+      // 填空题
+      if (record.isCorrect === true) {
+        if (currentQIndex < questions.length - 1) {
+          navigateQuestion(1);
+        } else {
+          showToast("🎉 已答完全部试题！");
+          showScoreModal();
+        }
+        return;
+      }
+
+      const isOk = checkQuestion(q.uid);
+      saveStorage();
+      renderSingleQuestion();
+
+      if (isOk) {
+        showToast("✨ 回答正确！");
+        document.getElementById('solutionBox').classList.add('show');
+      } else {
+        showToast("❌ 答案有误或尚未填全，请参考提示核对");
+        triggerHintForCurrentQuestion();
+      }
+    }
+
+    /* 智能提示逻辑 */
+    function triggerHintForCurrentQuestion() {
+      const q = questions[currentQIndex];
+      const record = userRecords[q.uid];
+      record.isHinted = true;
+      record.hintLevel = (record.hintLevel || 0) + 1;
+
+      if (q.type === 'judge') {
+        showToast("💡 已展示判断题思路点拨与法条提示！");
+      } else {
+        if (record.hintLevel === 1) {
+          showToast("💡 提示级别 1：显示各空字数");
+        } else if (record.hintLevel === 2) {
+          showToast("💡 提示级别 2：显示首字提示");
+        } else {
+          for (let i = 0; i < q.answers.length; i++) {
+            record.inputs[i] = q.answers[i];
+          }
+          record.isCorrect = true;
+          showToast("💡 提示级别 3：已自动填充标准答案");
+        }
+      }
+
+      saveStorage();
+      renderSingleQuestion();
+    }
+
+    function triggerSingleBlankHint(uid, blankIdx) {
+      const q = ALL_QUESTIONS.find(item => item.uid === uid);
+      const record = userRecords[uid];
+      const ans = q.answers[blankIdx];
+      
+      record.isHinted = true;
+      const cur = record.inputs[blankIdx] || '';
+      if (!cur) {
+        record.inputs[blankIdx] = ans.slice(0, 1);
+        showToast(`💡 提示：该空【首字为 "${ans.slice(0, 1)}"】，共 ${ans.length} 个字`);
+      } else {
+        record.inputs[blankIdx] = ans;
+        showToast(`💡 已填充该空答案：${ans}`);
+      }
+      saveStorage();
+      if (appMode === 'single') renderSingleQuestion();
+      else renderListMode();
+    }
+
+    function updateHintBubble(q, record) {
+      const bubble = document.getElementById('hintBubble');
+      const content = document.getElementById('hintBubbleContent');
+      
+      if (record.hintLevel > 0 && record.isCorrect !== true) {
+        if (q.type === 'judge' || q.type === 'choice' || q.type === 'multi_choice' || q.type === 'essay') {
+          content.innerHTML = `<div><strong>核心得分线索：</strong>${escapeHtml(q.hint || '按照法条要求及岗位全流程作答')}</div>`;
+        } else {
+          let hints = q.answers.map((ans, idx) => {
+            if (record.hintLevel === 1) return `空(${idx + 1}): <b>${ans.length} 个字</b>`;
+            if (record.hintLevel >= 2) return `空(${idx + 1}): <b>首字为「${ans[0]}」</b> (共${ans.length}字)`;
+          });
+          content.innerHTML = `<div><strong>解题线索：</strong>${hints.join('； ')}。如需直接揭晓，可再次点击提示或查看答案。</div>`;
+        }
+        bubble.classList.add('show');
+      } else {
+        bubble.classList.remove('show');
+      }
+    }
+
+    function updateSolutionBox(q, record) {
+      const box = document.getElementById('solutionBox');
+      const content = document.getElementById('solutionContent');
+
+      if (q.type === 'judge') {
+        const correctBadge = q.answer ? 
+          `<span style="color: #059669; font-weight: 800; font-size: 1.05rem;">✔ 正确 (True)</span>` : 
+          `<span style="color: #dc2626; font-weight: 800; font-size: 1.05rem;">✖ 错误 (False)</span>`;
+        content.innerHTML = `
+          <div style="margin-bottom: 8px;"><b>标准判断：</b>${correctBadge}</div>
+          <div style="font-size: 0.94rem; line-height: 1.8;"><b>考点剖析：</b>${escapeHtml(q.explanation)}</div>
+        `;
+      } else if (q.type === 'choice') {
+        const optText = (q.options.find(o => o.key === q.answer) || {}).text || '';
+        content.innerHTML = `
+          <div style="margin-bottom: 8px;"><b>标准答案：</b><span style="color: #059669; font-weight: 800; font-size: 1.1rem;">【 ${q.answer} 】 ${escapeHtml(optText)}</span></div>
+          <div style="font-size: 0.94rem; line-height: 1.8;"><b>考点剖析：</b>${escapeHtml(q.explanation)}</div>
+        `;
+      } else if (q.type === 'multi_choice') {
+        const ansList = q.answer.map(k => {
+          const t = (q.options.find(o => o.key === k) || {}).text || '';
+          return `[${k}] ${t}`;
+        }).join('； ');
+        content.innerHTML = `
+          <div style="margin-bottom: 8px;"><b>标准答案：</b><span style="color: #059669; font-weight: 800; font-size: 1.05rem;">【 ${q.answer.join(', ')} 】</span> ${escapeHtml(ansList)}</div>
+          <div style="font-size: 0.94rem; line-height: 1.8;"><b>考点剖析：</b>${escapeHtml(q.explanation)}</div>
+        `;
+      } else if (q.type === 'essay') {
+        const pointsHtml = q.points.map(p => `<div class="essay-point-item">${escapeHtml(p)}</div>`).join('');
+        const kwHtml = q.coreKeywords ? `<div style="margin-top: 10px; font-size: 0.88rem;"><b>🔑 记忆采分核心词：</b><span style="color: var(--primary); font-weight: 600;">${escapeHtml(q.coreKeywords)}</span></div>` : '';
+        content.innerHTML = `
+          <div style="margin-bottom: 10px;"><b>标准参考要点：</b></div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">${pointsHtml}</div>
+          ${kwHtml}
+        `;
+      } else {
+        let highlighted = q.template;
+        q.answers.forEach((ans, idx) => {
+          highlighted = highlighted.replace(`{${idx + 1}}`, `<span class="solution-highlight">${ans}</span>`);
+        });
+        content.innerHTML = `
+          <div style="margin-bottom: 8px;"><b>完整标准答案：</b>${highlighted}</div>
+          <div style="font-size: 0.82rem; color: var(--text-muted);">出处/考点：${q.source || (q.sectionName || '《知识测试试题库》')}</div>
+        `;
+      }
+
+      if (record.isCorrect === true) {
+        box.classList.add('show');
+      } else {
+        box.classList.remove('show');
+      }
+    }
+
+    function toggleSolutionBox() {
+      document.getElementById('solutionBox').classList.toggle('show');
+    }
+
+    function navigateQuestion(delta) {
+      const newIdx = currentQIndex + delta;
+      if (newIdx >= 0 && newIdx < questions.length) {
+        currentQIndex = newIdx;
+        renderSingleQuestion();
+      }
+    }
+
+    function jumpToQuestionByUid(uid) {
+      const idx = questions.findIndex(q => q.uid === uid);
+      if (idx !== -1) {
+        currentQIndex = idx;
+        if (appMode !== 'single') switchAppMode('single');
+        renderSingleQuestion();
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+      }
+    }
+
+    function toggleCurrentStar() {
+      const q = questions[currentQIndex];
+      const record = userRecords[q.uid];
+      record.isStarred = !record.isStarred;
+      saveStorage();
+      renderSingleQuestion();
+      showToast(record.isStarred ? "⭐ 已加入收藏题库" : "已取消收藏");
+    }
+
+    /* ============================================================
+       整卷全览模式
+       ============================================================ */
+    function renderListMode() {
+      const container = document.getElementById('listQuestionsContainer');
+      container.innerHTML = '';
+
+      let lastType = null;
+      questions.forEach(q => {
+        if (q.type !== lastType) {
+          const heading = document.createElement('div');
+          heading.className = 'list-section-heading';
+          heading.innerText = q.type === 'blank' ? "一、通用填空题" : (q.type === 'judge' ? "二、通用判断题" : (q.type === 'choice' ? "三、通用单项选择题" : (q.type === 'multi_choice' ? "四、通用多项选择题" : (q.type === 'special' ? "五、二、专项题（档案数字化类）" : "六、三、问答题（涉密档案数字化加工员）"))));
+          container.appendChild(heading);
+          lastType = q.type;
+        }
+
+        const record = userRecords[q.uid];
+        const card = document.createElement('div');
+        let cardClass = 'list-item-card';
+        if (record.isCorrect === true) cardClass += ' correct-item';
+        else if (record.isCorrect === false) cardClass += ' wrong-item';
+
+        card.className = cardClass;
+        card.id = `list_card_${q.uid}`;
+
+        if (q.type === 'blank' || q.type === 'special') {
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700; color: var(--text-muted); font-size: 0.88rem;">
+              <span>${q.typeName} 第 ${q.num} 题</span>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-ghost btn-sm" onclick="jumpToQuestionByUid('${q.uid}')">🎯 沉浸练习</button>
+                <button class="btn btn-ghost btn-sm" onclick="triggerSingleBlankHint('${q.uid}', 0)">💡 提示</button>
+              </div>
+            </div>
+            <div class="q-body" style="font-size: 1.05rem; line-height: 2;">
+              ${generateQuestionHtml(q, record, 'list')}
+            </div>
+          `;
+        } else if (q.type === 'judge') {
+          // 判断题
+          const trueChecked = record.judgeVal === true ? 'checked' : '';
+          const falseChecked = record.judgeVal === false ? 'checked' : '';
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700; color: var(--text-muted); font-size: 0.88rem;">
+              <span>判断题 第 ${q.num} 题</span>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-ghost btn-sm" onclick="jumpToQuestionByUid('${q.uid}')">🎯 沉浸练习</button>
+              </div>
+            </div>
+            <div class="q-body" style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 12px;">
+              ${q.num}. ${escapeHtml(q.statement)}
+            </div>
+            <div style="display: flex; gap: 20px; align-items: center; font-weight: 600;">
+              <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="radio" name="judge_list_${q.uid}" ${trueChecked} onchange="handleListJudgeChange('${q.uid}', true)" />
+                <span style="color: #059669;">✔ 正确</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="radio" name="judge_list_${q.uid}" ${falseChecked} onchange="handleListJudgeChange('${q.uid}', false)" />
+                <span style="color: #dc2626;">✖ 错误</span>
+              </label>
+            </div>
+          `;
+        } else if (q.type === 'choice') {
+          // 选择题
+          let optsHtml = q.options.map(opt => {
+            const isChecked = record.choiceVal === opt.key ? 'checked' : '';
+            return `
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 12px; border-radius: 6px; background: var(--bg-color); border: 1px solid var(--card-border);">
+                <input type="radio" name="choice_list_${q.uid}" ${isChecked} onchange="handleListChoiceChange('${q.uid}', '${opt.key}')" />
+                <span style="font-weight: 700; font-family: 'JetBrains Mono';">${opt.key}.</span>
+                <span>${escapeHtml(opt.text)}</span>
+              </label>
+            `;
+          }).join('');
+
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700; color: var(--text-muted); font-size: 0.88rem;">
+              <span>单项选择题 第 ${q.num} 题</span>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-ghost btn-sm" onclick="jumpToQuestionByUid('${q.uid}')">🎯 沉浸练习</button>
+              </div>
+            </div>
+            <div class="q-body" style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 12px; font-weight: 600;">
+              ${q.num}. ${escapeHtml(q.question)}
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              ${optsHtml}
+            </div>
+          `;
+        } else if (q.type === 'essay') {
+          // 问答题全览
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700; color: var(--text-muted); font-size: 0.88rem;">
+              <span>${q.typeName} 第 ${q.num} 题</span>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-ghost btn-sm" onclick="jumpToQuestionByUid('${q.uid}')">🎯 沉浸练习/默写</button>
+              </div>
+            </div>
+            <div class="q-body" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 12px; font-weight: 700;">
+              ${q.num}. ${escapeHtml(q.title)}
+            </div>
+            <textarea class="essay-textarea" style="min-height: 100px; margin-bottom: 12px;" placeholder="在此默写作答..." oninput="handleListEssayInput('${q.uid}', this.value)">${escapeHtml(record.essayText || '')}</textarea>
+            <details style="font-size: 0.94rem; color: var(--text-muted); background: var(--bg-color); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--card-border);">
+              <summary style="font-weight: 700; cursor: pointer; color: var(--primary);">👁 点击展开标准参考答案要点</summary>
+              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 4px;">
+                ${q.points.map(p => `<div class="essay-point-item">${escapeHtml(p)}</div>`).join('')}
+              </div>
+            </details>
+          `;
+        } else if (q.type === 'multi_choice') {
+          // 多选题
+          if (!record.multiVals) record.multiVals = [];
+          let optsHtml = q.options.map(opt => {
+            const isChecked = record.multiVals.includes(opt.key) ? 'checked' : '';
+            return `
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 12px; border-radius: 6px; background: var(--bg-color); border: 1px solid var(--card-border);">
+                <input type="checkbox" name="multi_list_${q.uid}" ${isChecked} onchange="handleListMultiToggle('${q.uid}', '${opt.key}')" />
+                <span style="font-weight: 700; font-family: 'JetBrains Mono';">${opt.key}.</span>
+                <span>${escapeHtml(opt.text)}</span>
+              </label>
+            `;
+          }).join('');
+
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-weight: 700; color: var(--text-muted); font-size: 0.88rem;">
+              <span>多项选择题 第 ${q.num} 题</span>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-ghost btn-sm" onclick="jumpToQuestionByUid('${q.uid}')">🎯 沉浸练习</button>
+              </div>
+            </div>
+            <div class="q-body" style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 12px; font-weight: 600;">
+              ${q.num}. [多选题] ${escapeHtml(q.question)}
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              ${optsHtml}
+            </div>
+          `;
+        }
+        container.appendChild(card);
+      });
+    }
+
+    function handleListJudgeChange(uid, val) {
+      const q = ALL_QUESTIONS.find(item => item.uid === uid);
+      userRecords[uid].judgeVal = val;
+      userRecords[uid].isCorrect = (val === q.answer);
+      saveStorage();
+      renderDashboard();
+      renderGridNav();
+    }
+
+    function batchCheckListAnswers() {
+      let correctTotal = 0;
+      questions.forEach(q => {
+        const isOk = checkQuestion(q.uid);
+        if (isOk) correctTotal++;
+      });
+      saveStorage();
+      renderListMode();
+      renderGridNav();
+      renderDashboard();
+      showScoreModal();
+    }
+
+    function batchClearListAnswers() {
+      if (!confirm("确定要清空通用题目的作答记录重新练习吗？（专项训练及问答记录将完整保留）")) return;
+      resetAllProgress();
+    }
+
+    /* ============================================================
+       背题记忆模式
+       ============================================================ */
+    function renderMemoryMode() {
+      const container = document.getElementById('memoryQuestionsContainer');
+      container.innerHTML = '';
+
+      let lastType = null;
+      questions.forEach(q => {
+        if (q.type !== lastType) {
+          const heading = document.createElement('div');
+          heading.className = 'list-section-heading';
+          heading.innerText = q.type === 'blank' ? "一、通用填空题速记" : (q.type === 'judge' ? "二、通用判断题速记" : (q.type === 'choice' ? "三、通用单项选择题速记" : (q.type === 'multi_choice' ? "四、通用多项选择题速记" : (q.type === 'special' ? "五、专项题（档案数字化类）速记" : "六、专业问答题核心采分速记"))));
+          container.appendChild(heading);
+          lastType = q.type;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'list-item-card';
+
+        if (q.type === 'blank' || q.type === 'special') {
+          let memoryText = q.template;
+          q.answers.forEach((ans, idx) => {
+            memoryText = memoryText.replace(`{${idx + 1}}`, `<span class="memory-token" onclick="toggleMemoryToken(this)">${ans}</span>`);
+          });
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.88rem; font-weight: 700; color: var(--primary);">
+              <span>${q.typeName} 第 ${q.num} 题</span>
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: normal;">点击关键词可切换遮盖/显示</span>
+            </div>
+            <div style="font-size: 1.08rem; line-height: 2.2; color: var(--text-main);">
+              ${q.num}. ${memoryText}
+            </div>
+          `;
+        } else if (q.type === 'judge') {
+          // 判断题
+          const isRight = q.answer;
+          const mark = isRight ? 
+            `<span style="background: #ecfdf5; color: #059669; padding: 2px 8px; border-radius: 4px; font-weight: 800;">【 ✔ 正确 】</span>` : 
+            `<span style="background: #fef2f2; color: #dc2626; padding: 2px 8px; border-radius: 4px; font-weight: 800;">【 ✖ 错误 】</span>`;
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem; font-weight: 700; color: var(--primary);">
+              <span>判断题 第 ${q.num} 题</span>
+              ${mark}
+            </div>
+            <div style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 8px;">
+              ${q.num}. ${escapeHtml(q.statement)}
+            </div>
+            <div style="font-size: 0.88rem; color: var(--text-muted); background: var(--primary-light); padding: 8px 12px; border-radius: 6px;">
+              💡 <b>要点速记：</b>${escapeHtml(q.explanation)}
+            </div>
+          `;
+        } else if (q.type === 'essay') {
+          // 问答题速记
+          const pts = q.points.map(p => `<div class="essay-point-item" style="border-left-color: #059669; background: #ecfdf5;">${escapeHtml(p)}</div>`).join('');
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem; font-weight: 700; color: var(--primary);">
+              <span>问答题 第 ${q.num} 题</span>
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: normal;">核心答题模板</span>
+            </div>
+            <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main); margin-bottom: 12px; font-weight: 700;">
+              ${q.num}. ${escapeHtml(q.title)}
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px;">
+              ${pts}
+            </div>
+            <div style="font-size: 0.88rem; color: var(--text-muted); background: var(--primary-light); padding: 8px 12px; border-radius: 6px;">
+              💡 <b>记忆口诀与采分要领：</b>${escapeHtml(q.hint)}
+            </div>
+          `;
+        } else if (q.type === 'multi_choice') {
+          // 多选题背题
+          let optsList = q.options.map(o => {
+            const isAns = q.answer.includes(o.key);
+            const style = isAns ? 'font-weight: 800; color: #059669; background: #ecfdf5;' : 'color: var(--text-muted);';
+            return `<div style="padding: 4px 8px; border-radius: 4px; ${style}">${o.key}. ${escapeHtml(o.text)} ${isAns ? '✔ 正确项' : ''}</div>`;
+          }).join('');
+
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem; font-weight: 700; color: var(--primary);">
+              <span>多项选择题 第 ${q.num} 题</span>
+              <span style="background: #ecfdf5; color: #059669; padding: 2px 8px; border-radius: 4px; font-weight: 800;">【 正确答案: ${q.answer.join(', ')} 】</span>
+            </div>
+            <div style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 8px; font-weight: 600;">
+              ${q.num}. [多选题] ${escapeHtml(q.question)}
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px;">
+              ${optsList}
+            </div>
+            <div style="font-size: 0.88rem; color: var(--text-muted); background: var(--primary-light); padding: 8px 12px; border-radius: 6px;">
+              💡 <b>要点速记：</b>${escapeHtml(q.explanation)}
+            </div>
+          `;
+        } else if (q.type === 'choice') {
+          // 选择题
+          const ansOpt = q.options.find(o => o.key === q.answer) || {};
+          let optsList = q.options.map(o => {
+            const isAns = o.key === q.answer;
+            const style = isAns ? 'font-weight: 800; color: #059669; background: #ecfdf5;' : 'color: var(--text-muted);';
+            return `<div style="padding: 4px 8px; border-radius: 4px; ${style}">${o.key}. ${escapeHtml(o.text)} ${isAns ? '✔ 标准答案' : ''}</div>`;
+          }).join('');
+
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem; font-weight: 700; color: var(--primary);">
+              <span>单项选择题 第 ${q.num} 题</span>
+              <span style="background: #ecfdf5; color: #059669; padding: 2px 8px; border-radius: 4px; font-weight: 800;">【 正确答案: ${q.answer} 】</span>
+            </div>
+            <div style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 8px; font-weight: 600;">
+              ${q.num}. ${escapeHtml(q.question)}
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px;">
+              ${optsList}
+            </div>
+            <div style="font-size: 0.88rem; color: var(--text-muted); background: var(--primary-light); padding: 8px 12px; border-radius: 6px;">
+              💡 <b>要点速记：</b>${escapeHtml(q.explanation)}
+            </div>
+          `;
+        }
+        container.appendChild(card);
+      });
+    }
+
+    function toggleMemoryToken(el) {
+      el.classList.toggle('hidden-mask');
+    }
+
+    function toggleAllMemoryMask(shouldHide) {
+      document.querySelectorAll('.memory-token').forEach(el => {
+        if (shouldHide) el.classList.add('hidden-mask');
+        else el.classList.remove('hidden-mask');
+      });
+      showToast(shouldHide ? "🙈 已隐藏所有填空关键词，开始背诵！" : "👁 已全部揭开关键词");
+    }
+
+    /* ============================================================
+       答题卡与状态过滤
+       ============================================================ */
+    function setNavFilter(filter, btn) {
+      navFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGridNav();
+    }
+
+    function renderGridNav() {
+      const grid = document.getElementById('gridNavContainer');
+      grid.innerHTML = '';
+
+      questions.forEach((q, idx) => {
+        const record = userRecords[q.uid];
+        
+        if (navFilter === 'wrong' && record.isCorrect !== false) return;
+        if (navFilter === 'starred' && !record.isStarred) return;
+        if (navFilter === 'unanswered' && record.isCorrect !== null) return;
+
+        const btn = document.createElement('button');
+        btn.className = 'grid-btn';
+        // 区分填空和判断的编号，例如 填1~50, 判1~20
+        btn.innerText = q.type === 'blank' ? q.num : (q.type === 'judge' ? `P${q.num}` : (q.type === 'choice' ? `C${q.num}` : (q.type === 'multi_choice' ? `M${q.num}` : (q.type === 'special' ? `S${q.num}` : `Q${q.num}`))));
+        btn.title = `${q.typeName} 第 ${q.num} 题`;
+
+        if (idx === currentQIndex && appMode === 'single') {
+          btn.classList.add('current');
+        }
+        if (record.isCorrect === true) {
+          btn.classList.add('correct');
+        } else if (record.isCorrect === false) {
+          btn.classList.add('wrong');
+        } else if (record.isHinted) {
+          btn.classList.add('hinted');
+        }
+
+        if (record.isStarred) {
+          btn.classList.add('starred');
+        }
+
+        btn.onclick = () => jumpToQuestionByUid(q.uid);
+        grid.appendChild(btn);
+      });
+    }
+
+    /* ============================================================
+       数据看板
+       ============================================================ */
+    function renderDashboard() {
+      let answered = 0;
+      let correct = 0;
+      let wrong = 0;
+      let hinted = 0;
+      let starred = 0;
+
+      questions.forEach(q => {
+        const r = userRecords[q.uid];
+        if (r.isCorrect !== null) answered++;
+        if (r.isCorrect === true) correct++;
+        if (r.isCorrect === false) wrong++;
+        if (r.isHinted) hinted++;
+        if (r.isStarred) starred++;
+      });
+
+      document.getElementById('totalCountDisplay').innerText = questions.length;
+      document.getElementById('answeredCountDisplay').innerText = answered;
+      document.getElementById('correctCountDisplay').innerText = correct;
+      document.getElementById('wrongCountDisplay').innerText = wrong;
+      document.getElementById('hintedCountDisplay').innerText = hinted;
+      document.getElementById('wrongCountBadge').innerText = wrong;
+      document.getElementById('starredCountBadge').innerText = starred;
+
+      const pct = Math.round((answered / questions.length) * 100) || 0;
+      document.getElementById('progressPercentDisplay').innerText = `${pct}%`;
+      document.getElementById('progressBarFill').style.width = `${pct}%`;
+    }
+
+    /* ============================================================
+       专项训练工具
+       ============================================================ */
+    function startWrongQuestionsPractice() {
+      const wrongList = questions.filter(q => userRecords[q.uid].isCorrect === false);
+      if (wrongList.length === 0) {
+        showToast("🌟 太棒了！当前所选范围内暂无错题！");
+        return;
+      }
+      jumpToQuestionByUid(wrongList[0].uid);
+      setNavFilter('wrong', document.querySelectorAll('.filter-btn')[1]);
+      showToast(`🎯 已为你筛选出 ${wrongList.length} 道错题进行专项训练！`);
+    }
+
+    function startStarredQuestionsPractice() {
+      const starList = questions.filter(q => userRecords[q.uid].isStarred);
+      if (starList.length === 0) {
+        showToast("⭐ 暂无收藏题目，可点击右上角星星收藏");
+        return;
+      }
+      jumpToQuestionByUid(starList[0].uid);
+      setNavFilter('starred', document.querySelectorAll('.filter-btn')[2]);
+      showToast(`⭐ 已加载 ${starList.length} 道收藏题目`);
+    }
+
+    function shufflePracticeOrder() {
+      for (let i = questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questions[i], questions[j]] = [questions[j], questions[i]];
+      }
+      currentQIndex = 0;
+      renderSingleQuestion();
+      renderListMode();
+      renderMemoryMode();
+      showToast("🔀 已随机打乱题目顺序！");
+    }
+
+    function resetAllProgress() {
+      if (!confirm("确定要重置通用题目的答题进度吗？\n\n🛡️【安全保护】：专项训练题（10题）与专业问答题（8题）的作答与背诵记录将完整保留，不会被清空！")) return;
+      
+      // 遍历所有题目，仅重置通用题型，严格保护并保留专项题 (special) 与问答题 (essay)
+      ALL_QUESTIONS.forEach(q => {
+        if (q.type === 'special' || q.type === 'essay') {
+          return; // 保护专项训练与问答题作答记录
+        }
+        userRecords[q.uid] = {
+          inputs: (q.type === 'blank') ? new Array(q.answers.length).fill('') : [],
+          judgeVal: null,
+          choiceVal: null,
+          multiVals: [],
+          essayText: '',
+          isMastered: false,
+          isCorrect: null,
+          isHinted: false,
+          hintLevel: 0,
+          isStarred: false
+        };
+      });
+
+      saveStorage();
+      renderDashboard();
+      renderSingleQuestion();
+      renderListMode();
+      renderGridNav();
+      showToast("🔄 通用题目已重置（专项训练及问答记录已完整保留）！");
+    }
+
+    /* 快捷键设置 */
+    function setupKeyboard() {
+      window.addEventListener('keydown', (e) => {
+        if (appMode !== 'single') return;
+
+        // Alt + H : 触发提示
+        if (e.altKey && (e.key === 'h' || e.key === 'H')) {
+          e.preventDefault();
+          triggerHintForCurrentQuestion();
+          return;
+        }
+
+        const q = questions[currentQIndex];
+        // 如果当前是判断题
+        if (q && q.type === 'judge') {
+          if (e.key === 't' || e.key === 'T' || e.key === '1') {
+            e.preventDefault();
+            handleJudgeSelect(true);
+            return;
+          }
+          if (e.key === 'f' || e.key === 'F' || e.key === '2') {
+            e.preventDefault();
+            handleJudgeSelect(false);
+            return;
+          }
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleCardSubmitOrNext();
+            return;
+          }
+        }
+        // 如果当前是单选题
+        if (q && q.type === 'choice') {
+          const k = e.key.toUpperCase();
+          if (k === 'A' || e.key === '1') {
+            e.preventDefault();
+            handleChoiceSelect('A');
+            return;
+          }
+          if (k === 'B' || e.key === '2') {
+            e.preventDefault();
+            handleChoiceSelect('B');
+            return;
+          }
+          if (k === 'C' || e.key === '3') {
+            e.preventDefault();
+            handleChoiceSelect('C');
+            return;
+          }
+          if (k === 'D' || e.key === '4') {
+            e.preventDefault();
+            handleChoiceSelect('D');
+            return;
+          }
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleCardSubmitOrNext();
+            return;
+          }
+        }
+        // 如果当前是多选题
+        if (q && q.type === 'multi_choice') {
+          const k = e.key.toUpperCase();
+          if (['A','B','C','D','E'].includes(k)) {
+            e.preventDefault();
+            handleMultiChoiceToggle(k);
+            return;
+          }
+          if (['1','2','3','4','5'].includes(e.key)) {
+            const map = {'1':'A','2':'B','3':'C','4':'D','5':'E'};
+            e.preventDefault();
+            handleMultiChoiceToggle(map[e.key]);
+            return;
+          }
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleCardSubmitOrNext();
+            return;
+          }
+        }
+
+        if (document.activeElement.tagName !== 'INPUT') {
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            navigateQuestion(-1);
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            navigateQuestion(1);
+          }
+        }
+      });
+    }
+
+    function showScoreModal() {
+      let correct = 0;
+      questions.forEach(q => {
+        if (userRecords[q.uid].isCorrect === true) correct++;
+      });
+      const pct = Math.round((correct / questions.length) * 100);
+      document.getElementById('modalScoreText').innerText = `${pct} 分`;
+      document.getElementById('modalScoreDesc').innerText = `共 ${questions.length} 题，答对 ${correct} 题，错题 ${questions.length - correct} 题`;
+      document.getElementById('scoreModal').classList.add('show');
+    }
+
+    function closeScoreModal() {
+      document.getElementById('scoreModal').classList.remove('show');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('globalToast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2400);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function toggleTheme() {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.body.removeAttribute('data-theme');
+        document.getElementById('themeToggleBtn').innerText = '🌙 暗色模式';
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        document.getElementById('themeToggleBtn').innerText = '☀️ 亮色模式';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
